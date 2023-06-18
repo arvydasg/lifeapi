@@ -1,0 +1,34 @@
+* lifeapi
+** Useful links
+- strava developers - https://developers.strava.com/
+- strava account - https://www.strava.com/dashboard?num_entries=60
+- strava everyone activity - https://www.strava.com/activities/9074302414
+- strava api section in account page - https://www.strava.com/settings/api
+- strava api docs - https://developers.strava.com/docs/reference/#api-Activities-getActivityById
+- Getting Started with the Strava API -
+  https://developers.strava.com/docs/getting-started/
+
+** How to
+*** Get tokens
+- Go to https://www.strava.com/settings/api
+- get Client ID and Client Secret
+- Store them as secret environment variables, f.x in .env file
+*** Create "Authorization callback domain"
+- create a python file
+- create .gitignore
+- create .env file and add venv and .env file in it with all environment variables
+- create and activate virtual environment, check with ~which python~
+- pip install requests requests-oauthlib python-dotenv
+- Add code like in simple-api-strava.py
+- Create index.html page that will act as "Authorization callback domain".
+- Create github page out of it.
+- Set the domain name f.x arvydasg.github.io in
+  https://www.strava.com/settings/api
+*** Make a request
+- run the python script
+- copy the code you get in the terminal
+- open this code in the browser
+- click authorize in the opened window
+- copy the url where you have been redirected (should have been to arvydasg.github.io/repo-name)
+- paste the url in the python scrip terminal
+- you will then receive the data.

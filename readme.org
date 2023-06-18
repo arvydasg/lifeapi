@@ -1,0 +1,9 @@
+* Lifeapi
+
+Why not track everything about myself. Instead of writing a manual
+journal each evening, why not pull various info from API's of the apps
+that I am using daily?
+
+Big big inspiration - [[https://www.reddit.com/r/SQL/comments/rru1re/using_sql_as_a_life_database/?utm_source=share&utm_medium=android_app&utm_name=androidcss&utm_term=1&utm_content=share_button][using SQL as a life database]]
+
+FxLifeSheet - https://github.com/KrauseFx/FxLifeSheet, https://howisfelix.today

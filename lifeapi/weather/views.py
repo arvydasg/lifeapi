@@ -2,9 +2,8 @@ import requests
 from django.shortcuts import render
 from datetime import datetime, timedelta
 
+
 # Create your views here.
-
-
 def weather_view(request):
     # Get yesterday's date
     yesterday = datetime.now() - timedelta(days=1)
@@ -17,19 +16,24 @@ def weather_view(request):
     data = response.json()
 
     # Find the desired observation
-    desired_observation = next(
-        (
-            obs
-            for obs in data["observations"]
-            if obs["observationTimeUtc"] == f"{date_str} 12:00:00"
-        ),
-        None,
-    )
+    desired_observation = None
+    for x in data["observations"]:
+        if x["observationTimeUtc"] == f"{date_str} 12:00:00":
+            desired_observation = x
+            break
 
-    # assign the desired_observation to context
+    # # assign the desired_observation to context
     context = {
         "observation": desired_observation,
     }
+
+    # Store only the needed values in the database
+    from .models import Weather
+
+    weather = Weather(
+        date=date_str, temperature=desired_observation.get("airTemperature", "")
+    )
+    weather.save()
 
     # pass that context to the template and render it
     return render(request, "weather/weather_template.html", context)

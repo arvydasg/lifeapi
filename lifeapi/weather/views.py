@@ -1,14 +1,18 @@
 import requests
 from django.shortcuts import render
-from django.http import HttpResponse
+from datetime import datetime, timedelta
 
 # Create your views here.
 
 
 def weather_view(request):
+    # Get yesterday's date
+    yesterday = datetime.now() - timedelta(days=1)
+    date_str = yesterday.strftime("%Y-%m-%d")
+
     # Make the API request
     response = requests.get(
-        "https://api.meteo.lt/v1/stations/vilniaus-ams/observations/2023-06-19"
+        f"https://api.meteo.lt/v1/stations/vilniaus-ams/observations/{date_str}"
     )
     data = response.json()
 
@@ -17,13 +21,15 @@ def weather_view(request):
         (
             obs
             for obs in data["observations"]
-            if obs["observationTimeUtc"] == "2023-06-19 12:00:00"
+            if obs["observationTimeUtc"] == f"{date_str} 12:00:00"
         ),
         None,
     )
 
+    # assign the desired_observation to context
     context = {
         "observation": desired_observation,
     }
 
+    # pass that context to the template and render it
     return render(request, "weather/weather_template.html", context)

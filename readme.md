@@ -27,22 +27,23 @@ the future give my family or friends to use this app to track their
 manual (or maybe even api) stuffs about their life.
 
 
-- Possible things to track
+## Possible things to track
+
 - strava api (workouts, duration, kms)
 - chrome history
 - instagram (something)
 - duolingo (streak, words learned, time spent)
 - YouTube (what I have watched or minutes)
-- workouts (y/n)
+- workouts (y/n manual inpput)
 - weight (kgs)
 - computer time (rescue time)
 - database size (entries, like felix)
 - unique website visitors (like felix)
 - Swarm? My location (like felix)
 - weather each day
-- meditated or not
+- meditated or not (manual input, or app?)
 - what programming language I used the most (some app)
-- cold shower or not
+- cold shower or not (manual input)
 - my mood (like felix)
 - daily steps (some phone app)
 - healthy or not (like felix) Good to know by season or by activity level or by what I have been eating
@@ -50,11 +51,11 @@ manual (or maybe even api) stuffs about their life.
 - location (see how mood changes by location)
 - location check ins (like felix) (cafe, office, metro, gym, train station, hotel)
 - slept (hours in the night)
-- sleep quality
-- mood at night
-- mood in the morning
+- sleep quality (manual input)
+- mood at night (manual input)
+- mood in the morning (manual input)
 - exercise time
-- streched
+- streched (manual input)
 - bike kms
 - listened to audiobook (true/false)
 - confidence (1-5)
@@ -74,3 +75,6 @@ whoever to watch.
 - Linkedin connections
 - shutterstock sales
 - expenses
+- worked from home or not (manual input)
+- m / s (manual input)
+- pikt for no reason or not (manual input)

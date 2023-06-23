@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class WeatherConfig(AppConfig):
+class BaseConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "weather"
+    name = "lifeapi_apps.base"

@@ -51,7 +51,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "lifeapi.urls"
+ROOT_URLCONF = "lifeapi_project.urls"
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "lifeapi.wsgi.application"
+WSGI_APPLICATION = "lifeapi_project.wsgi.application"
 
 
 # Database

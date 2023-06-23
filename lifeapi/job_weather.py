@@ -4,7 +4,7 @@
 import os
 import django
 # Set the DJANGO_SETTINGS_MODULE environment variable
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lifeapi.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lifeapi_project.settings")
 # Configure Django settings
 django.setup()
 

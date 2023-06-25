@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lifeapi_apps.base_app',
+    "lifeapi_apps.weather_app",
 ]
 
 MIDDLEWARE = [

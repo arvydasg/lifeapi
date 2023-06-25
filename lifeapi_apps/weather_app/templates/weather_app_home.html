@@ -2,4 +2,6 @@
 
 {% block content %}
     <h1>Welcome to My WEATHER APP</h1>
+    <p>In this app you can see the latest weather information that was stored to the db. You can navigate to it by going here:</p>
+    <a href="{% url 'weather_app_display_from_db' %}">Please click here to see the latest weather record</a>
 {% endblock %}

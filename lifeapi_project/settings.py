@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'lifeapi_apps.base_app',
     "lifeapi_apps.weather_app",
+    "lifeapi_apps.quiz_app",
 ]
 
 MIDDLEWARE = [

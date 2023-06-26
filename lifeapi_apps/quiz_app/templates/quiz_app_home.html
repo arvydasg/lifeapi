@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Welcome to My QUIZ APP</h1>
+    <p>Here you can answer some questions bla.</p>
+    <p>Quiz is here - <a href="{% url 'quiz_start' %}">Here</a></p>
+    <p>all questions can see - <a href="{% url 'quiz_questions' %}">Here</a></p>
+{% endblock %}

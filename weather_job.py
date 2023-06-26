@@ -10,7 +10,7 @@ django.setup()
 
 import requests
 from datetime import datetime, timedelta
-from weather.models import Weather
+from lifeapi_apps.weather_app.models import Weather
 
 def save_weather_to_db(date_str, desired_observation):
     # Save the weather data to the database

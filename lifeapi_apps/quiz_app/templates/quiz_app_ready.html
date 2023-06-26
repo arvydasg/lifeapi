@@ -2,12 +2,12 @@
 
 {% block content %}
     <h2>Ready to start the quiz?</h2>
-    <form action="{% url 'quiz' %}" method="POST">
+    <form action="{% url 'quiz_start' %}" method="POST">
         {% csrf_token %}
         <button type="submit" name="start_quiz">Start Quiz</button>
     </form>
 
-    <form action="{% url 'quiz' %}" method="POST">
+    <form action="{% url 'quiz_start' %}" method="POST">
         {% csrf_token %}
         <button type="submit" name="delete_answers">Delete My Answers for Today</button>
     </form>

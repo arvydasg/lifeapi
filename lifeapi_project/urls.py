@@ -1,5 +1,5 @@
 """
-URL configuration for lifeapi project.
+URL configuration for lifeapi_project project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("lifeapi_apps.base.urls")),
-    path("weather/", include("lifeapi_apps.weather.urls")),
+    path('admin/', admin.site.urls),
+    path("", include("lifeapi_apps.base_app.urls")),
+    path("weather/", include("lifeapi_apps.weather_app.urls")),
+    path("quiz/", include("lifeapi_apps.quiz_app.urls")),
 ]

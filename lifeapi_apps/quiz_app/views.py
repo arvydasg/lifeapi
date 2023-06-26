@@ -7,32 +7,32 @@ from django.contrib import messages
 from .forms import QuestionForm
 
 
-def home(request):
-    return render(request, 'home.html')
+def quiz_app_home(request):
+    return render(request, 'quiz_app_home.html')
 
 
-def questions(request):
+def quiz_questions(request):
     '''View to display all the questions'''
     questions = Question.objects.all()
     context = {'questions': questions}
-    return render(request, 'quiz/questions.html', context)
+    return render(request, 'quiz_app_questions.html', context)
 
 
-def add_question(request):
+def quiz_add_question(request):
     '''View to add a posibility to add new questions'''
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('questions')
+            return redirect('quiz_questions')
     else:
         form = QuestionForm()
     
     context = {'form': form}
-    return render(request, 'quiz/add_question.html', context)
+    return render(request, 'quiz_app_add_question.html', context)
 
 
-def quiz(request):
+def quiz_start(request):
     '''View to add a posibility to add new questions'''
     if request.method == 'POST':
         # Check if the user clicked the "Start Quiz" button
@@ -46,7 +46,7 @@ def quiz(request):
                 first_question = Question.objects.first()
                 context = {'question': first_question}
                 
-                return render(request, 'quiz/question.html', context)
+                return render(request, 'quiz_app_question.html', context)
 
         # Check if the user clicked the "Delete Answers" button
         elif 'delete_answers' in request.POST:
@@ -58,7 +58,7 @@ def quiz(request):
     messages_to_display = messages.get_messages(request)
     context = {'messages': messages_to_display}
 
-    return render(request, 'quiz/ready.html', context)
+    return render(request, 'quiz_app_ready.html', context)
 
 
 def quiz_question(request, question_id):
@@ -77,16 +77,16 @@ def quiz_question(request, question_id):
         else:
             question = Question.objects.get(id=next_question_id)
             context = {'question': question}
-            return render(request, 'quiz/question.html', context)
+            return render(request, 'quiz_app_question.html', context)
 
     # Retrieve the question based on the question_id
     question = Question.objects.get(id=question_id)
     context = {'question': question}
-    return render(request, 'quiz/question.html', context)
+    return render(request, 'quiz_app_question.html', context)
 
 
 def quiz_summary(request):
     '''View to display all entries of answers table'''
     answers = Answer.objects.all()
     context = {'answers': answers}
-    return render(request, 'quiz/summary.html', context)
+    return render(request, 'quiz_app_summary.html', context)

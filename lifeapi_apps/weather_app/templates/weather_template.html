@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Weather Information</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Most recent weather fetch</h2>
     <!-- data that is fetched from an api  -->
     <!-- <h1>Weather Information</h1>
     {% if observation %}
@@ -29,5 +27,4 @@
     {% else %}
         <p>No observation found.</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}

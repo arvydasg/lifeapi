@@ -7,6 +7,7 @@
             <tr>
                 <th>ID</th>
                 <th>Description</th>
+                <th>Question type</th>
             </tr>
         </thead>
         <tbody>
@@ -14,6 +15,7 @@
                 <tr>
                     <td>{{ question.id }}</td>
                     <td>{{ question.description }}</td>
+                    <td>{{ question.type}}</td>
                 </tr>
             {% endfor %}
         </tbody>

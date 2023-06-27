@@ -4,11 +4,18 @@ from django.utils import timezone
 # Create your models here.
 
 class Question(models.Model):
+    TYPE_CHOICES = [
+        ('YN', 'Yes/No'),
+        ('Scale', 'Scale 1-5'),
+        ('Text', 'Text'),
+    ]
+
     description = models.TextField()
+    type = models.CharField(max_length=10, choices=TYPE_CHOICES, default='Text')
 
     # change the way question object is displayed in django admin panel
     def __str__(self):
-        return self.description
+        return f"{self.description} - {self.type}"
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

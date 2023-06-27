@@ -11,11 +11,11 @@ def quiz_app_home(request):
     return render(request, 'quiz_app_home.html')
 
 
-def quiz_questions(request):
+def quiz_question_list(request):
     '''View to display all the questions'''
     questions = Question.objects.all()
     context = {'questions': questions}
-    return render(request, 'quiz_app_questions.html', context)
+    return render(request, 'quiz_app_question_list.html', context)
 
 
 def quiz_add_question(request):

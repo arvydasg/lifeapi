@@ -1,21 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Quiz Summary</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Question</th>
-                <th>Answer</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for answer in answers %}
-            <tr>
-                <td>{{ answer.question.description }}</td>
-                <td>{{ answer.answer }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h2>Quiz Summary:</h2>
+    <ul>
+        {% for question, answer in answers.items %}
+            <li>{{ question }}: {{ answer }}</li>
+        {% endfor %}
+    </ul>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" name="store_answers">Store Answers</button>
+    </form>
 {% endblock %}

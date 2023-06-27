@@ -5,6 +5,7 @@ from django.utils import timezone
 from datetime import date
 from django.contrib import messages
 from .forms import QuestionForm
+from django.db import transaction
 
 
 def quiz_app_home(request):
@@ -66,9 +67,8 @@ def quiz_question(request, question_id):
         question_id = int(request.POST.get('question_id'))
         answer_text = request.POST.get('answer')
 
-        # Save the answer to the database
-        answer = Answer(question_id=question_id, answer=answer_text)
-        answer.save()
+        # Save the answer to the session
+        request.session['answer_' + str(question_id)] = answer_text
 
         # Redirect to the next question or finish the quiz if all questions are answered
         next_question_id = question_id + 1
@@ -86,7 +86,30 @@ def quiz_question(request, question_id):
 
 
 def quiz_summary(request):
-    '''View to display all entries of answers table'''
-    answers = Answer.objects.all()
+    '''View to display all entries of answers stored in the session'''
+    answers = {}
+    for question_id, question in Question.objects.all().values_list('id', 'description'):
+        answer_key = 'answer_' + str(question_id)
+        if answer_key in request.session:
+            answer_text = request.session[answer_key]
+            answers[question] = answer_text
+    
+    print(answers)
+    # {'Workout': 'YES', 'Meditated': 'YES', 'Cold shower': 'YES', 'Sleep quality': '2', 'Mood in the morning': '2', 'Streched': 'YES', 'Rained today': 'YES', 'Work from home': 'YES', 'Master': 'YES', 'Sx': 'YES', 'Was pikc': 'YES', 'Mintys': 'ffff'}
+
     context = {'answers': answers}
+
+    if request.method == 'POST':
+        if 'store_answers' in request.POST:
+            # Store answers in the database
+            with transaction.atomic():
+                for question_text, answer_text in answers.items():
+                    question = Question.objects.get(description=question_text)
+                    answer = Answer(question=question, answer=answer_text)
+                    answer.save()
+            
+            # Clear session data
+            request.session.clear()
+            return redirect('data_table')
+
     return render(request, 'quiz_app_summary.html', context)

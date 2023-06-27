@@ -4,32 +4,10 @@ from django.http import HttpResponse
 from django.utils import timezone
 from datetime import date
 from django.contrib import messages
-from .forms import QuestionForm
 
 
 def quiz_app_home(request):
     return render(request, 'quiz_app_home.html')
-
-
-def quiz_question_list(request):
-    '''View to display all the questions'''
-    questions = Question.objects.all()
-    context = {'questions': questions}
-    return render(request, 'quiz_app_question_list.html', context)
-
-
-def quiz_add_question(request):
-    '''View to add a posibility to add new questions'''
-    if request.method == 'POST':
-        form = QuestionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('quiz_questions')
-    else:
-        form = QuestionForm()
-    
-    context = {'form': form}
-    return render(request, 'quiz_app_add_question.html', context)
 
 
 def quiz_start(request):

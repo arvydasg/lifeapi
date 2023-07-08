@@ -4,7 +4,7 @@
 import os
 import django
 # Set the DJANGO_SETTINGS_MODULE environment variable
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lifeapi_project.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.production")
 # Configure Django settings
 django.setup()
 
@@ -21,8 +21,8 @@ def save_weather_to_db(date_str, desired_observation):
     weather.save()
     print(f"{date_str} and {desired_observation.get('airTemperature', '')} are saved to the database")
 
-# Get the date. Write days=-1 to get yesterdays date/weather
-yesterday = datetime.now() - timedelta(days=0)
+# Get the date. Write days=1 to get yesterdays date/weather
+yesterday = datetime.now() - timedelta(days=365)
 date_str = yesterday.strftime("%Y-%m-%d")
 
 # Make the API request to fetch weather data

@@ -2,9 +2,11 @@
 <html>
 <head>
     <title>My website</title>
+    {% load static %}
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-</head>
+    <link rel="stylesheet" href="{% static 'global.css' %}">
+  </head>
 <body>
 
         <!-- Header -->
@@ -58,7 +60,7 @@
 
     <!-- Footer -->
     <footer class="mt-4 text-center">
-        <p>&copy; 2023 My Website. All rights reserved.</p>
+        <p>&copy; 2023 My Website. All rights <span class="red">reserved</span>.</p>
     </footer>
 
     <!-- Include Bootstrap JS -->

@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -82,6 +81,14 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# global location of static files
+STATICFILES_DIRS = [
+    BASE_DIR / "static", # os.path.join(BASE_DIR, 'static')
+]
+
+# what happens when we run collecstatic
+STATIC_ROOT = BASE_DIR / "staticfiles-cdn" # in production, we want cdn
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

@@ -1,5 +1,6 @@
 from .base import *
 from dotenv import load_dotenv
+import os
 
 load_dotenv('.env_prod')  # take environment variables from .env.
 

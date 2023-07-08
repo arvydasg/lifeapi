@@ -8,16 +8,10 @@ def home(request):
 
 
 def data_table(request):
-    # Retrieve all questions
     questions = Question.objects.all()
-
-    # Retrieve all answers
     answers = Answer.objects.all()
-
-    # Retrieve all weather entries
     weather_entries = Weather.objects.all()
 
-    # Pass the data to the template
     context = {
         'questions': questions,
         "answers": answers,

@@ -11,7 +11,6 @@ def quiz_app_home(request):
 
 
 def quiz_start(request):
-    '''View to add a posibility to add new questions'''
     if request.method == 'POST':
         # Check if the user clicked the "Start Quiz" button
         if 'start_quiz' in request.POST:
@@ -36,6 +35,7 @@ def quiz_start(request):
     messages_to_display = messages.get_messages(request)
     context = {'messages': messages_to_display}
 
+    # this is the default view we get when there are no post requests are passed to this view
     return render(request, 'quiz_app_ready.html', context)
 
 

@@ -1,8 +1,11 @@
 from .base import *
+from dotenv import load_dotenv
 
-DEBUG = False
+load_dotenv('.env_prod')  # take environment variables from .env.
 
-ALLOWED_HOSTS = ['127.0.0.1',]
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+
+DEBUG = int(os.environ.get('DEBUG', 0))
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

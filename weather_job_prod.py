@@ -22,7 +22,7 @@ def save_weather_to_db(date_str, desired_observation):
     print(f"{date_str} and {desired_observation.get('airTemperature', '')} are saved to the database")
 
 # Get the date. Write days=1 to get yesterdays date/weather
-yesterday = datetime.now() - timedelta(days=365)
+yesterday = datetime.now() - timedelta(days=0)
 date_str = yesterday.strftime("%Y-%m-%d")
 
 # Make the API request to fetch weather data

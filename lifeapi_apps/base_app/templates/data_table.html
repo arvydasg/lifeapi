@@ -3,27 +3,36 @@
 {% block content %}
     <h2>Data Table</h2>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table">
             <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Temperature</th>
+                <tr >
+                    <th class="vertical">Date</th>
+                    <th class="vertical">Temperature</th>
                     {% for question in questions %}
-                        <th>{{question.description}}</th>
+                        {% if question.description != "Mintys" %}   
+                            <th class="vertical">{{question.description}}</th>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             </thead>
             <tbody>
+                <!-- for each weather entry - create a row -->
                 {% for weather_entry in weather_entries|dictsortreversed:'date' %}
                     <tr>
+                    <!-- first row - date -->
                     <td>{{ weather_entry.date|date:"Y-m-d" }}</td>
+                    <!-- second row - today's fetched temperature at 12:00 -->
                     <td>{{ weather_entry.temperature }}</td>
+                        <!-- the rest of the answers to the questions -->
                         {% for question in questions %}
-                            {% for answer in question.answer_set.all %}
-                                {% if answer.date_added.date == weather_entry.date %}
-                                    <td>{{ answer.answer }}</td>
-                                {% endif %}
-                            {% endfor %}
+                            <!-- if question is x, do not display it -->
+                            {% if question.description != "Mintys" %}
+                                {% for answer in question.answer_set.all %}
+                                    {% if answer.date_added.date == weather_entry.date %}
+                                        <td class="answer-field">{{ answer.answer }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %} 
                         {% endfor %}
                     </tr>
                 {% endfor %}

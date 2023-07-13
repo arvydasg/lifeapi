@@ -15,7 +15,9 @@
                         <th class="vertical">{{ question.description }}</th>
                     {% endfor %}
                     {% for question in text_questions %}
-                        <th class="vertical">{{ question.description }}</th>
+                        {% if question.description != "Journal" and question.description != "Learn" %}
+                            <th class="vertical">{{ question.description }}</th>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             </thead>
@@ -39,11 +41,13 @@
                             {% endfor %}
                         {% endfor %}
                         {% for question in text_questions %}
-                            {% for answer in question.answer_set.all %}
-                                {% if answer.date_added.date == weather_entry.date %}
-                                    <td class="answer-field">{{ answer.answer }}</td>
-                                {% endif %}
-                            {% endfor %}
+                            {% if question.description != "Journal" and question.description != "Learn" %}
+                                {% for answer in question.answer_set.all %}
+                                    {% if answer.date_added.date == weather_entry.date %}
+                                        <td class="answer-field">{{ answer.answer }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         {% endfor %}
                     </tr>
                 {% endfor %}

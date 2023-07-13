@@ -90,3 +90,15 @@ def data_table(request):
     }
 
     return render(request, 'data_table.html', context)
+
+
+def journal(request):
+    journal_question = Question.objects.get(description="Journal")
+    answers = journal_question.answer_set.all()
+
+    context = {
+        'question': journal_question,
+        'answers': answers,
+    }
+
+    return render(request, 'journal.html', context)

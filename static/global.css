@@ -1,6 +1,7 @@
-.red {
+.red-underline {
     color: rgb(223, 40, 40);
     font-size: large;
+    text-decoration: underline;
 }
 
 .vertical {

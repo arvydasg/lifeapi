@@ -12,8 +12,16 @@ def data_table(request):
     answers = Answer.objects.all()
     weather_entries = Weather.objects.all()
 
+    # Separate the questions based on their types
+    yn_questions = questions.filter(type='YN')
+    scale_questions = questions.filter(type='Scale')
+    text_questions = questions.filter(type='Text')
+
     context = {
-        'questions': questions,
+        'yn_questions': yn_questions,
+        'scale_questions': scale_questions,
+        'text_questions': text_questions,
+
         "answers": answers,
         'weather_entries': weather_entries,
     }

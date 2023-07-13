@@ -18,7 +18,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    answer = models.CharField(max_length=255, blank=False)
+    answer = models.TextField(blank=False)
     date_added = models.DateTimeField(default=timezone.now)
 
     # change the way answer object is displayed in django admin panel

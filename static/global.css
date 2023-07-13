@@ -7,3 +7,7 @@
 .vertical {
     writing-mode: vertical-rl;
 }
+
+th.wide-column {
+    padding-right: 100px;
+}

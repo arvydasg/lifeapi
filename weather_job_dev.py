@@ -33,6 +33,8 @@ data_fetched_from_api = response.json()
 # Retrieve desired observation from the fetched data
 desired_observation = None
 for observation in data_fetched_from_api["observations"]:
+    # if you try to fetch data for 12:00 at 09:00 - it will fail, 
+    # because 12:00 data is not yet present in the api
     if observation["observationTimeUtc"] == f"{date_str} 12:00:00":
         desired_observation = observation
         break

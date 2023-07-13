@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Question, Answer
+from lifeapi_apps.weather_app.models import Weather
 from django.http import HttpResponse
 from django.utils import timezone
 from datetime import date
@@ -68,3 +69,24 @@ def quiz_summary(request):
     answers = Answer.objects.all()
     context = {'answers': answers}
     return render(request, 'quiz_app_summary.html', context)
+
+
+def data_table(request):
+    questions = Question.objects.all()
+    answers = Answer.objects.all()
+    weather_entries = Weather.objects.all()
+
+    # Separate the questions based on their types
+    yn_questions = questions.filter(type='YN')
+    scale_questions = questions.filter(type='Scale')
+    text_questions = questions.filter(type='Text')
+
+    context = {
+        'yn_questions': yn_questions,
+        'scale_questions': scale_questions,
+        'text_questions': text_questions,
+        "answers": answers,
+        'weather_entries': weather_entries,
+    }
+
+    return render(request, 'data_table.html', context)

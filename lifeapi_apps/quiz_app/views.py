@@ -104,3 +104,15 @@ def journal(request):
     }
 
     return render(request, 'journal.html', context)
+
+
+def learn(request):
+    learn = Question.objects.get(description="Learn")
+    answers = learn.answer_set.all()
+
+    context = {
+        'learn': learn,
+        'answers': answers,
+    }
+
+    return render(request, 'learn.html', context)

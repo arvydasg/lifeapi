@@ -8,7 +8,9 @@ from django.contrib import messages
 
 
 def quiz_app_home(request):
-    return render(request, 'quiz_app_home.html')
+    answers = Answer.objects.all()
+    context = {'answers': answers}
+    return render(request, 'quiz_app_home.html', context)
 
 
 def quiz_start(request):

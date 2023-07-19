@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>Website Fixes</h1>
+
+        <!-- Form to add new fixes -->
+        <h2>Add New Fix:</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+        
+        <br>
+        
+        <!-- Display existing fixes in a Bootstrap table -->
+        <h2>Existing Fixes:</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date Added</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Actions</th> <!-- Add a new column for actions -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for fix in fixes %}
+                    <tr>
+                        <td>{{ fix.date_created }}</td>
+                        <td>{{ fix.description }}</td>
+                        <td>
+                            {% if fix.status == 'Fixed' %}
+                                <span class="badge badge-success">{{ fix.status }}</span>
+                            {% else %}
+                                <span class="badge badge-danger">{{ fix.status }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_website_fix' fix.id %}" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="{% url 'delete_website_fix' fix.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">No fixes recorded yet.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

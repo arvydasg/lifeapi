@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 from datetime import date
 from django.contrib import messages
+from django.db.models import Prefetch
 
 
 def quiz_app_home(request):
@@ -75,19 +76,17 @@ def quiz_summary(request):
 
 def data_table(request):
     questions = Question.objects.all()
-    answers = Answer.objects.all()
     weather_entries = Weather.objects.all()
 
     # Separate the questions based on their types
-    yn_questions = questions.filter(type='YN')
-    scale_questions = questions.filter(type='Scale')
-    text_questions = questions.filter(type='Text')
+    yn_questions = questions.filter(type='YN').prefetch_related('answer_set')
+    scale_questions = questions.filter(type='Scale').prefetch_related('answer_set')
+    text_questions = questions.filter(type='Text').prefetch_related('answer_set')
 
     context = {
         'yn_questions': yn_questions,
         'scale_questions': scale_questions,
         'text_questions': text_questions,
-        "answers": answers,
         'weather_entries': weather_entries,
     }
 

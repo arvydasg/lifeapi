@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>Delete Website Fix</h1>
+
+        <p>Are you sure you want to delete the following fix?</p>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Title:</th>
+                    <td>{{ fix.title }}</td>
+                </tr>
+                <tr>
+                    <th>Description:</th>
+                    <td>{{ fix.description }}</td>
+                </tr>
+                <tr>
+                    <th>Status:</th>
+                    <td>{{ fix.status }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+            <a href="{% url 'website_fixes' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

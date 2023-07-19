@@ -2,6 +2,18 @@
 
 {% block content %}
     <h2>Data Table</h2>
+
+    <p>This table gets populated in such a way:</p>
+    <ul>
+        <li>Daily, at 17:00 (with a help of cron job) a weather entry is fetched from an api</li>
+        <li>It is stored to the DB and then displayed in this table</li>
+        <li>User submits answers for a specific day</li>
+        <li>A check is made if there is a row with a weather entry of the same day that the answer was submitted</li>
+        <li>If there is not - answers are not getting displayed</li>
+        <li>If thre is - answers are getting displayed only for that specific day of the weather entry</li>
+        <li>So in theory weather fetching is crucial - without it - the whole thing breaks :D And weather api is the thing I do not control.. so..</li>
+    </ul>
+
     <div class="table-responsive">
         <table class="table">
             <thead>

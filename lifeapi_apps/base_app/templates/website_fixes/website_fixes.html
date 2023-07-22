@@ -36,11 +36,11 @@
                             {% endfor %}
                         </td>
                         <td>
-                            <a href="{% url 'delete_website_fix' fix.id %}" class="btn btn-sm btn-danger">
-                                <i class="fas fa-times"></i>
-                            </a>
                             <a href="{% url 'edit_website_fix' fix.id %}" class="btn btn-sm btn-info">
                                 <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a href="{% url 'delete_website_fix' fix.id %}" class="btn btn-sm btn-danger">
+                                <i class="fas fa-times"></i>
                             </a>
                         </td>
                     </tr>

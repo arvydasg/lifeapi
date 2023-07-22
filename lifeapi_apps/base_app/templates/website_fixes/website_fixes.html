@@ -21,6 +21,7 @@
                     <tr>
                         <td>{{ fix.date_created|date:"Y-m-d" }}</td>
                         <td><a class="text-dark" href="{% url 'edit_website_fix' fix.id %}">{{ fix.title }}</a></td>
+                        <td>{{ fix.date_created|date:"Y-m-d" }} {{ fix.date_created|time:"H:i" }}</td>
                         <td>
                             {% if fix.status == 'Fixed' %}
                                 <span class="badge badge-success">{{ fix.status }}</span>

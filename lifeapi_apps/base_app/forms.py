@@ -4,4 +4,4 @@ from .models import WebsiteFix
 class WebsiteFixForm(forms.ModelForm):
     class Meta:
         model = WebsiteFix
-        fields = ['title', 'description', 'tags']
+        fields = ['title', 'description', 'tags', 'status']

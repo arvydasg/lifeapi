@@ -2,12 +2,16 @@
 
 {% block content %}
     <h2>Journal Entries</h2>
-    {% for answer in answers|dictsortreversed:'date_added' %}
-        <article class="journal-entry">
-            <h3 class="entry-title">{{ answer.date_added|date:"Y-m-d" }}</h3>
-            <div class="entry-content">
-                <p>{{ answer.answer }}</p>
-            </div>
-        </article>
-    {% endfor %}
+    {% if answers %}
+        {% for answer in answers|dictsortreversed:'date_added' %}
+            <article class="journal-entry">
+                <h3 class="entry-title">{{ answer.date_added|date:"Y-m-d" }}</h3>
+                <div class="entry-content">
+                    <p>{{ answer.answer }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>No entries yet.</p>
+    {% endif %}
 {% endblock %}

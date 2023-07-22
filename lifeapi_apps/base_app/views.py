@@ -8,7 +8,7 @@ def home(request):
 
 
 def website_fixes(request):
-    fixes = WebsiteFix.objects.all().order_by('-date_created')
+    fixes = WebsiteFix.objects.all()
 
     context = {
         'fixes': fixes,

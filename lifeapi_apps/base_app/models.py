@@ -10,8 +10,9 @@ class WebsiteFixTag(models.Model):
 
 class WebsiteFix(models.Model):
     STATUS_CHOICES = (
-        ('Fixed', 'Fixed'),
+        ('Done', 'Done'),
         ('Not Fixed', 'Not Fixed'),
+        ('In Progress', 'In Progress'),
     )
 
     title = models.CharField(max_length=100)

@@ -19,12 +19,13 @@
             <tbody>
                 {% for fix in fixes %}
                     <tr>
-                        <td>{{ fix.date_created|date:"Y-m-d" }}</td>
-                        <td><a class="text-dark" href="{% url 'edit_website_fix' fix.id %}">{{ fix.title }}</a></td>
                         <td>{{ fix.date_created|date:"Y-m-d" }} {{ fix.date_created|time:"H:i" }}</td>
+                        <td><a class="text-dark" href="{% url 'preview_website_fix' fix.id %}">{{ fix.title }}</a></td>
                         <td>
-                            {% if fix.status == 'Fixed' %}
+                            {% if fix.status == 'Done' %}
                                 <span class="badge badge-success">{{ fix.status }}</span>
+                            {% elif fix.status == 'In Progress' %}
+                                <span class="badge badge-warning">{{ fix.status }}</span>
                             {% else %}
                                 <span class="badge badge-danger">{{ fix.status }}</span>
                             {% endif %}

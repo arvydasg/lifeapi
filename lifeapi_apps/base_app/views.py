@@ -8,6 +8,16 @@ def home(request):
 
 
 def website_fixes(request):
+    fixes = WebsiteFix.objects.all().order_by('-date_created')
+
+    context = {
+        'fixes': fixes,
+    }
+    
+    return render(request, 'website_fixes/website_fixes.html', context)
+
+
+def add_website_fix(request):
     if request.method == 'POST':
         form = WebsiteFixForm(request.POST)
         if form.is_valid():
@@ -16,14 +26,11 @@ def website_fixes(request):
     else:
         form = WebsiteFixForm()
 
-    fixes = WebsiteFix.objects.all().order_by('-date_created')
-
     context = {
         'form': form,
-        'fixes': fixes,
     }
     
-    return render(request, 'website_fixes.html', context)
+    return render(request, 'website_fixes/add_website_fix.html', context)
 
 
 def edit_website_fix(request, fix_id):
@@ -41,7 +48,7 @@ def edit_website_fix(request, fix_id):
         'form': form,
     }
 
-    return render(request, 'edit_website_fix.html', context)
+    return render(request, 'website_fixes/edit_website_fix.html', context)
 
 
 def delete_website_fix(request, fix_id):
@@ -55,4 +62,4 @@ def delete_website_fix(request, fix_id):
         'fix': fix,
     }
 
-    return render(request, 'delete_website_fix.html', context)
+    return render(request, 'website_fixes/delete_website_fix.html', context)

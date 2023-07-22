@@ -8,7 +8,7 @@ def home(request):
 
 
 def website_fixes(request):
-    fixes = WebsiteFix.objects.all().order_by('-date_created')
+    fixes = WebsiteFix.objects.all()
 
     context = {
         'fixes': fixes,
@@ -31,6 +31,16 @@ def add_website_fix(request):
     }
     
     return render(request, 'website_fixes/add_website_fix.html', context)
+
+
+def preview_website_fix(request, fix_id):
+    fix = get_object_or_404(WebsiteFix, id=fix_id)
+    
+    context = {
+        'fix': fix,
+    }
+
+    return render(request, 'website_fixes/preview_website_fix.html', context)
 
 
 def edit_website_fix(request, fix_id):

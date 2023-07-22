@@ -19,11 +19,13 @@
             <tbody>
                 {% for fix in fixes %}
                     <tr>
-                        <td>{{ fix.date_created|date:"Y-m-d" }}</td>
-                        <td><a class="text-dark" href="{% url 'edit_website_fix' fix.id %}">{{ fix.title }}</a></td>
+                        <td>{{ fix.date_created|date:"Y-m-d" }} {{ fix.date_created|time:"H:i" }}</td>
+                        <td><a class="text-dark" href="{% url 'preview_website_fix' fix.id %}">{{ fix.title }}</a></td>
                         <td>
-                            {% if fix.status == 'Fixed' %}
+                            {% if fix.status == 'Done' %}
                                 <span class="badge badge-success">{{ fix.status }}</span>
+                            {% elif fix.status == 'In Progress' %}
+                                <span class="badge badge-warning">{{ fix.status }}</span>
                             {% else %}
                                 <span class="badge badge-danger">{{ fix.status }}</span>
                             {% endif %}
@@ -34,7 +36,12 @@
                             {% endfor %}
                         </td>
                         <td>
-                            <a href="{% url 'delete_website_fix' fix.id %}" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="{% url 'edit_website_fix' fix.id %}" class="btn btn-sm btn-info">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a href="{% url 'delete_website_fix' fix.id %}" class="btn btn-sm btn-danger">
+                                <i class="fas fa-times"></i>
+                            </a>
                         </td>
                     </tr>
                 {% empty %}

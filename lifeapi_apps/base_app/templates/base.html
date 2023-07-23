@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Lifeapi - Index</title>
-    {% load static %}
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <!-- Personal global CSS -->
-    <link rel="stylesheet" href="{% static 'global.css' %}">
-    <!-- Datatables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-<body>
-
+  <head>
+      <title>Lifeapi</title>
+      {% load static %}
+      <!-- Include Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+      <!-- Personal global CSS -->
+      <link rel="stylesheet" href="{% static 'global.css' %}">
+      <!-- Datatables CSS -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+  <body>
     <!-- Header -->
     <header {% if user.is_authenticated %} class="authenticated"{% endif %}>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,10 +21,48 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-          
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
+                <!-- Weather app -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Weather app
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'weather_app_home' %}">Home</a>
+                    <a class="dropdown-item" href="{% url 'weather_app_display_from_db' %}">Latest fetch</a>                    
+                  </div>
+                </li>
+                <!-- Quiz app -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Quiz app
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'quiz_app_home' %}">Home</a>
+                    <a class="dropdown-item" href="{% url 'data_table' %}">Data Table</a>
+                    <a class="dropdown-item" href="{% url 'journal' %}">Journal</a>
+                    <a class="dropdown-item" href="{% url 'learn' %}">Learn</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'quiz_start' %}">Start quiz</a>
+                  </div>
+                </li>
+                <!-- Website_fixes app -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Website_fixes app
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'website_fixes' %}">All website fixes</a>
+                    <a class="dropdown-item" href="{% url 'add_website_fix' %}">Add website fix</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                </li>
                 {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin/">Admin panel</a>
+                  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'members_logout_user' %}">Logout</a>
                   </li>
@@ -34,20 +71,6 @@
                     <a class="nav-link" href="{% url 'members_login_user' %}">Login</a>
                   </li>
                 {% endif %}
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Apps
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'weather_app_home' %}">Weather app</a>
-                    <a class="dropdown-item" href="{% url 'quiz_app_home' %}">Quiz app</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/admin/">Admin panel</a>
-                  </div>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'website_fixes' %}">Website fixes</a>
-                </li>
               </ul>
               <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -110,5 +133,5 @@
         }]
       })
     </script>
-</body>
+  </body>
 </html>

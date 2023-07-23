@@ -11,3 +11,13 @@
 th.wide-column {
     padding-right: 100px;
 }
+
+header:not(.authenticated) {
+    background-color: red !important;
+    padding-bottom: 2px;
+}
+
+header.authenticated {
+    background-color: green !important;
+    padding-bottom: 2px;
+}

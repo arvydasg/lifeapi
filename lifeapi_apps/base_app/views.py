@@ -9,9 +9,11 @@ def home(request):
 
 def website_fixes(request):
     fixes = WebsiteFix.objects.all()
+    total_fixes_count = WebsiteFix.objects.count()
 
     context = {
         'fixes': fixes,
+        'total_fixes_count': total_fixes_count,
     }
     
     return render(request, 'website_fixes/website_fixes.html', context)

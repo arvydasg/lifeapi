@@ -2,6 +2,13 @@
 
 {% block content %}
     <div class="container mt-4">
+
+        <marquee behavior="scroll" direction="left">
+            <p>
+                Date: {% now "Y-m-d" %} | Total Website Fixes: {{ total_fixes_count }}  
+            </p>
+        </marquee>
+
         <h1>Website Fixes</h1>
 
         <a href="{% url 'add_website_fix' %}" class="btn btn-sm btn-primary mb-2">Add new fix</a>

@@ -17,7 +17,11 @@ def members_login_user(request):
         if user is not None:
             login(request, user)
             messages.success(request, ("You Were Logged in!"))
-            return redirect('home')
+            next_url = request.POST.get('next')  # Get the 'next' parameter from POST data(from members_login.html template)
+            if next_url:
+                return redirect(next_url)  # Redirect to 'next' URL if it exists
+            else:
+                return redirect('home')  # Redirect to 'home' URL if 'next' doesn't exist
         else:
             messages.success(request, ("There was an Error logging in, Try Again..."))
             return redirect('members_login_user')

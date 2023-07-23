@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import WebsiteFix
 from .forms import WebsiteFixForm
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -20,6 +21,7 @@ def website_fixes(request):
     return render(request, 'website_fixes/website_fixes.html', context)
 
 
+@login_required
 def add_website_fix(request):
     if request.method == 'POST':
         form = WebsiteFixForm(request.POST)
@@ -36,6 +38,7 @@ def add_website_fix(request):
     return render(request, 'website_fixes/add_website_fix.html', context)
 
 
+@login_required
 def preview_website_fix(request, fix_id):
     fix = get_object_or_404(WebsiteFix, id=fix_id)
     
@@ -46,6 +49,7 @@ def preview_website_fix(request, fix_id):
     return render(request, 'website_fixes/preview_website_fix.html', context)
 
 
+@login_required
 def edit_website_fix(request, fix_id):
     fix = get_object_or_404(WebsiteFix, id=fix_id)
 
@@ -64,6 +68,7 @@ def edit_website_fix(request, fix_id):
     return render(request, 'website_fixes/edit_website_fix.html', context)
 
 
+@login_required
 def delete_website_fix(request, fix_id):
     fix = get_object_or_404(WebsiteFix, id=fix_id)
 

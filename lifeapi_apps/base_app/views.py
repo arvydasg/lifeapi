@@ -9,7 +9,8 @@ def home(request):
 
 def website_fixes(request):
     fixes = WebsiteFix.objects.all()
-    total_fixes_count = WebsiteFix.objects.count()
+    not_fixed_fixes = WebsiteFix.objects.filter(status='Not Fixed')
+    total_fixes_count = not_fixed_fixes.count()
 
     context = {
         'fixes': fixes,

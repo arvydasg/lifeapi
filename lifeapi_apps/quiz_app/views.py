@@ -6,6 +6,7 @@ from django.utils import timezone
 from datetime import date
 from django.contrib import messages
 from django.db.models import Prefetch
+from django.contrib.auth.decorators import login_required
 
 
 def quiz_app_home(request):
@@ -13,7 +14,7 @@ def quiz_app_home(request):
     context = {'answers': answers}
     return render(request, 'quiz_app_home.html', context)
 
-
+@login_required
 def quiz_start(request):
     if request.method == 'POST':
         # Check if the user clicked the "Start Quiz" button
@@ -43,6 +44,7 @@ def quiz_start(request):
     return render(request, 'quiz_app_ready.html', context)
 
 
+@login_required
 def quiz_question(request, question_id):
     if request.method == 'POST':
         question_id = int(request.POST.get('question_id'))
@@ -67,6 +69,7 @@ def quiz_question(request, question_id):
     return render(request, 'quiz_app_question.html', context)
 
 
+@login_required
 def quiz_summary(request):
     '''View to display all entries of answers table'''
     answers = Answer.objects.all()
@@ -74,6 +77,7 @@ def quiz_summary(request):
     return render(request, 'quiz_app_summary.html', context)
 
 
+@login_required
 def data_table(request):
     questions = Question.objects.all()
     weather_entries = Weather.objects.all()
@@ -93,6 +97,7 @@ def data_table(request):
     return render(request, 'data_table.html', context)
 
 
+@login_required
 def journal(request):
     journal_question = Question.objects.get(description="Journal")
     answers = journal_question.answer_set.all()
@@ -105,6 +110,7 @@ def journal(request):
     return render(request, 'journal.html', context)
 
 
+@login_required
 def learn(request):
     learn = Question.objects.get(description="Learn")
     answers = learn.answer_set.all()

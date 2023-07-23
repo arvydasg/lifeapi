@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'lifeapi_apps.base_app',
     "lifeapi_apps.weather_app",
     "lifeapi_apps.quiz_app",
-    "debug_toolbar",    
+    "debug_toolbar",
+    "lifeapi_apps.members_app",    
 ]
 
 MIDDLEWARE = [
@@ -115,3 +116,5 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+LOGIN_URL = "/members/login_user"

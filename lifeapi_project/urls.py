@@ -23,4 +23,6 @@ urlpatterns = [
     path("weather/", include("lifeapi_apps.weather_app.urls")),
     path("quiz/", include("lifeapi_apps.quiz_app.urls")),
     path("__debug__/", include("debug_toolbar.urls")),
+    path("members/", include('django.contrib.auth.urls')),
+    path("members/", include("lifeapi_apps.members_app.urls")),
 ]

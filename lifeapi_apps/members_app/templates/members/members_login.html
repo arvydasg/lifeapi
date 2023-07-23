@@ -1,0 +1,22 @@
+{% extends 'members/members_base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>Login</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" name="username" aria-describedby="usernameHelp" placeholder="Username">
+              <small id="usernameHelp" class="form-text text-muted">User this and that.</small>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+    </div>
+{% endblock %}

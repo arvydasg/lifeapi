@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'lifeapi_apps.base_app',
     "lifeapi_apps.weather_app",
     "lifeapi_apps.quiz_app",
-    "debug_toolbar",    
+    "debug_toolbar",
+    "lifeapi_apps.members_app",    
 ]
 
 MIDDLEWARE = [

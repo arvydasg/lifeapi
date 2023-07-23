@@ -16,6 +16,7 @@ def members_login_user(request):
         # not None == username and password exists
         if user is not None:
             login(request, user)
+            messages.success(request, ("You Were Logged in!"))
             return redirect('home')
         else:
             messages.success(request, ("There was an Error logging in, Try Again..."))
@@ -25,3 +26,8 @@ def members_login_user(request):
     # display the login template
     else:
         return render(request, 'members/members_login.html', {})
+
+def members_logout_user(request):
+    logout(request)
+    messages.success(request, ("You Were Logged Out!"))
+    return redirect('home')

@@ -53,7 +53,9 @@
                     Website_fixes app
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'website_fixes_app_home' %}">Home</a>
                     <a class="dropdown-item" href="{% url 'website_fixes' %}">All website fixes</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'add_website_fix' %}">Add website fix</a>
                   </div>
                 </li>

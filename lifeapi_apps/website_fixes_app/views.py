@@ -26,8 +26,11 @@ def add_website_fix(request):
     if request.method == 'POST':
         form = WebsiteFixForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('website_fixes')
+            website_fix = form.save(commit=False)  # Don't save the form yet
+            website_fix.user = request.user  # Set the 'user' field to the current user
+            website_fix.save()  # Save the form with the associated user
+            print(request)
+            return redirect('website_fixes') # Redirect to the view that displays the fixes
     else:
         form = WebsiteFixForm()
 

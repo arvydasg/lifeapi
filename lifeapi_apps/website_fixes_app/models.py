@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class WebsiteFixTag(models.Model):
@@ -20,6 +21,7 @@ class WebsiteFix(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Not Fixed')
     date_created = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(WebsiteFixTag)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"{self.title} - {self.status} - {self.tags}"
+        return f"{self.title}"

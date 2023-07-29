@@ -49,10 +49,9 @@ Instead of writing a manual journal each evening, why not pull various info from
 - [ ] emacs usage
 - [ ] ate (fish/meat/veggies/trash food) (like dailyvis)
 - [ ] what google pin I placed (fetched)
-- [ ] steps (fetched)
 - [ ] shazammed songs (fetched)
 - [x] just simple notes/journal of how I felt(manual input)
-- [ ] every chatgpt question of mine (fetched)
+- [x] every chatgpt question of mine(nah, questions can be too big) (fetched)
 - [ ] onedrive photos also? nah, too much space in that way I could start sharing more of my content knowing that it  would go directly where I want, in one place, for future me or whoever to watch.(fetched)
 - [ ] spotify listening duration/what listened (fetched)
 - [ ] Linkedin connections (fetched)

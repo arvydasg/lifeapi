@@ -10,9 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def quiz_app_home(request):
-    answers = Answer.objects.all()
-    context = {'answers': answers}
-    return render(request, 'quiz_app_home.html', context)
+    return render(request, 'quiz_app_home.html')
 
 @login_required
 def quiz_start(request):
@@ -79,6 +77,7 @@ def quiz_summary(request):
 
 @login_required
 def data_table(request):
+    answers = Answer.objects.all()
     questions = Question.objects.all()
     weather_entries = Weather.objects.all()
 
@@ -92,6 +91,7 @@ def data_table(request):
         'scale_questions': scale_questions,
         'text_questions': text_questions,
         'weather_entries': weather_entries,
+        'answers': answers,
     }
 
     return render(request, 'data_table.html', context)

@@ -27,7 +27,7 @@ Instead of writing a manual journal each evening, why not pull various info from
 - [ ] !database size (entries, like felix)
 - [ ] unique website visitors (like felix)
 - [ ] Swarm? My location ( fetch like felix)
-- [ ] weather each day
+- [x] weather each day
 - [x] meditated or not (manual input, or app?)
 - [ ] what programming language I used the most ( fetch some app)
 - [x] cold shower or not (manual input)
@@ -39,13 +39,13 @@ Instead of writing a manual journal each evening, why not pull various info from
 - [x] check ins (manual input like felix) (cafe, office, metro, gym, train station, hotel)
 - [x] slept (hours in the night)
 - [x] sleep quality (manual input)
-- [x] mood in the morning (manual input)
+- [x] mood in the morning (manual input)(removed)
 - [x] streched (manual input)
 - [ ] bike kms (fetch)
 - [ ] !listened to audiobook/podcast (true/false)
 - [x] Read (manual input y/n)
-- [x] confidence (1-5)
-- [x] decisiveness (1-5)
+- [x] confidence (1-5)(removed)
+- [x] decisiveness (1-5)(removed)
 - [ ] emacs usage
 - [ ] ate (fish/meat/veggies/trash food) (like dailyvis)
 - [ ] what google pin I placed (fetched)

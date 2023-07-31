@@ -11,6 +11,15 @@
 
         <h1>Website Fixes</h1>
 
+        {% if user.is_authenticated %}
+            <form method="get">
+                {% csrf_token %}
+                {{ view_form.as_p }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <br>
+        {% endif %}
+
         <a href="{% url 'add_website_fix' %}" class="btn btn-sm btn-primary mb-2">Add new fix</a>
 
         <table class="table table-striped" id="example">

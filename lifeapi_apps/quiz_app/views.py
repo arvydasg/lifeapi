@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 def quiz_app_home(request):
     return render(request, 'quiz_app_home.html')
 
+
 @login_required
 def quiz_start(request):
     if request.method == 'POST':
@@ -24,7 +25,10 @@ def quiz_start(request):
             else:
                 # Retrieve the first question from the database
                 first_question = Question.objects.first()
-                context = {'question': first_question}
+
+                context = {
+                    'question': first_question
+                }
                 
                 return render(request, 'quiz_app_question.html', context)
 
@@ -36,7 +40,10 @@ def quiz_start(request):
 
     # Retrieve any flash messages and pass them to the template context
     messages_to_display = messages.get_messages(request)
-    context = {'messages': messages_to_display}
+
+    context = {
+        'messages': messages_to_display
+        }
 
     # this is the default view we get when there are no post requests are passed to this view
     return render(request, 'quiz_app_ready.html', context)
@@ -52,18 +59,25 @@ def quiz_question(request, question_id):
         answer = Answer(question_id=question_id, answer=answer_text)
         answer.save()
 
-        # Redirect to the next question or finish the quiz if all questions are answered
-        next_question_id = question_id + 1
-        if next_question_id > Question.objects.count():
+        # use queryset filtering to find the next question with an id greater than the current question_id. 
+        # We then use order_by('id').first() to retrieve the first question that matches the filter. 
+        # If a next question is found, it is rendered on the template.
+        try:
+            next_question = Question.objects.filter(id__gt=question_id).order_by('id').first()
+            if next_question:
+                return render(request, 'quiz_app_question.html', {'question': next_question})
+            else:
+                return redirect('quiz_summary')  # Redirect to the quiz summary page
+        except Question.DoesNotExist:
             return redirect('quiz_summary')  # Redirect to the quiz summary page
-        else:
-            question = Question.objects.get(id=next_question_id)
-            context = {'question': question}
-            return render(request, 'quiz_app_question.html', context)
 
     # Retrieve the question based on the question_id
     question = Question.objects.get(id=question_id)
-    context = {'question': question}
+
+    context = {
+        'question': question
+        }
+
     return render(request, 'quiz_app_question.html', context)
 
 

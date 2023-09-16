@@ -130,3 +130,19 @@ def learn(request):
     }
 
     return render(request, 'learn.html', context)
+
+
+@login_required
+def add_question(request):
+    if request.method == 'POST':
+        # Retrieve question details from the form submission
+        description = request.POST.get('description')
+        question_type = request.POST.get('question_type', 'Text')  # Default to 'Text' if not provided
+
+        # Create a new question
+        new_question = Question(description=description, type=question_type, created_by=request.user)
+        new_question.save()
+
+        return redirect('quiz_app_home')  # Redirect to the home page after adding the question
+
+    return render(request, 'add_question.html')

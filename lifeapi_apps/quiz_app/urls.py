@@ -8,4 +8,5 @@ urlpatterns = [
     path("data_table/", views.data_table, name="data_table"),
     path("journal/", views.journal, name="journal"),
     path("learn/", views.learn, name="learn"),
+    path('add_question/', views.add_question, name='add_question'),
 ]

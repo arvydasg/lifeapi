@@ -55,8 +55,11 @@ def quiz_question(request, question_id):
         question_id = int(request.POST.get('question_id'))
         answer_text = request.POST.get('answer')
 
+        # Get the currently logged-in user
+        user = request.user
+
         # Save the answer to the database
-        answer = Answer(question_id=question_id, answer=answer_text)
+        answer = Answer(question_id=question_id, answer=answer_text, created_by=user)
         answer.save()
 
         # use queryset filtering to find the next question with an id greater than the current question_id. 

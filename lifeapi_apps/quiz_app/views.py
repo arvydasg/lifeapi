@@ -35,7 +35,7 @@ def quiz_start(request):
         # Check if the user clicked the "Delete Answers" button
         elif 'delete_answers' in request.POST:
             today = date.today()
-            Answer.objects.filter(date_added__date=today).delete()
+            Answer.objects.filter(date_added__date=today, created_by=request.user).delete()
             messages.success(request, "Your answers for today have been deleted.")
 
     # Retrieve any flash messages and pass them to the template context

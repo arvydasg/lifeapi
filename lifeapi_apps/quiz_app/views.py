@@ -70,9 +70,9 @@ def quiz_question(request, question_id):
             if next_question:
                 return render(request, 'quiz_app_question.html', {'question': next_question})
             else:
-                return redirect('quiz_summary')  # Redirect to the quiz summary page
+                return redirect('data_table')
         except Question.DoesNotExist:
-            return redirect('quiz_summary')  # Redirect to the quiz summary page
+            return redirect('data_table')
 
     # Retrieve the question based on the question_id
     question = Question.objects.get(id=question_id)
@@ -82,14 +82,6 @@ def quiz_question(request, question_id):
         }
 
     return render(request, 'quiz_app_question.html', context)
-
-
-@login_required
-def quiz_summary(request):
-    '''View to display all entries of answers table'''
-    answers = Answer.objects.all()
-    context = {'answers': answers}
-    return render(request, 'quiz_app_summary.html', context)
 
 
 @login_required
@@ -138,3 +130,19 @@ def learn(request):
     }
 
     return render(request, 'learn.html', context)
+
+
+@login_required
+def add_question(request):
+    if request.method == 'POST':
+        # Retrieve question details from the form submission
+        description = request.POST.get('description')
+        question_type = request.POST.get('question_type', 'Text')  # Default to 'Text' if not provided
+
+        # Create a new question
+        new_question = Question(description=description, type=question_type, created_by=request.user)
+        new_question.save()
+
+        return redirect('data_table')  # Redirect to the home page after adding the question
+
+    return render(request, 'add_question.html')

@@ -143,6 +143,6 @@ def add_question(request):
         new_question = Question(description=description, type=question_type, created_by=request.user)
         new_question.save()
 
-        return redirect('quiz_app_home')  # Redirect to the home page after adding the question
+        return redirect('data_table')  # Redirect to the home page after adding the question
 
     return render(request, 'add_question.html')

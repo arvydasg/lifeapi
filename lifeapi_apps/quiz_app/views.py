@@ -20,11 +20,11 @@ def quiz_start(request):
         if 'start_quiz' in request.POST:
             # Check if entries for today already exist
             today = date.today()
-            if Answer.objects.filter(date_added__date=today).exists():
+            if Answer.objects.filter(date_added__date=today, created_by=request.user).exists():
                 messages.warning(request, "You have already answered the quiz for today.")
             else:
                 # Retrieve the first question from the database
-                first_question = Question.objects.first()
+                first_question = Question.objects.filter(created_by=request.user).first()
 
                 context = {
                     'question': first_question
@@ -66,7 +66,7 @@ def quiz_question(request, question_id):
         # We then use order_by('id').first() to retrieve the first question that matches the filter. 
         # If a next question is found, it is rendered on the template.
         try:
-            next_question = Question.objects.filter(id__gt=question_id).order_by('id').first()
+            next_question = Question.objects.filter(id__gt=question_id, created_by=request.user).order_by('id').first()
             if next_question:
                 return render(request, 'quiz_app_question.html', {'question': next_question})
             else:

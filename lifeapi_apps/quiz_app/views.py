@@ -94,8 +94,8 @@ def quiz_summary(request):
 
 @login_required
 def data_table(request):
-    answers = Answer.objects.all()
-    questions = Question.objects.all()
+    answers = Answer.objects.filter(created_by=request.user)
+    questions = Question.objects.filter(created_by=request.user)
     weather_entries = Weather.objects.all()
 
     # Separate the questions based on their types

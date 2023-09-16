@@ -20,11 +20,11 @@ def quiz_start(request):
         if 'start_quiz' in request.POST:
             # Check if entries for today already exist
             today = date.today()
-            if Answer.objects.filter(date_added__date=today).exists():
+            if Answer.objects.filter(date_added__date=today, created_by=request.user).exists():
                 messages.warning(request, "You have already answered the quiz for today.")
             else:
                 # Retrieve the first question from the database
-                first_question = Question.objects.first()
+                first_question = Question.objects.filter(created_by=request.user).first()
 
                 context = {
                     'question': first_question
@@ -35,7 +35,7 @@ def quiz_start(request):
         # Check if the user clicked the "Delete Answers" button
         elif 'delete_answers' in request.POST:
             today = date.today()
-            Answer.objects.filter(date_added__date=today).delete()
+            Answer.objects.filter(date_added__date=today, created_by=request.user).delete()
             messages.success(request, "Your answers for today have been deleted.")
 
     # Retrieve any flash messages and pass them to the template context
@@ -55,15 +55,18 @@ def quiz_question(request, question_id):
         question_id = int(request.POST.get('question_id'))
         answer_text = request.POST.get('answer')
 
+        # Get the currently logged-in user
+        user = request.user
+
         # Save the answer to the database
-        answer = Answer(question_id=question_id, answer=answer_text)
+        answer = Answer(question_id=question_id, answer=answer_text, created_by=user)
         answer.save()
 
         # use queryset filtering to find the next question with an id greater than the current question_id. 
         # We then use order_by('id').first() to retrieve the first question that matches the filter. 
         # If a next question is found, it is rendered on the template.
         try:
-            next_question = Question.objects.filter(id__gt=question_id).order_by('id').first()
+            next_question = Question.objects.filter(id__gt=question_id, created_by=request.user).order_by('id').first()
             if next_question:
                 return render(request, 'quiz_app_question.html', {'question': next_question})
             else:
@@ -91,8 +94,8 @@ def quiz_summary(request):
 
 @login_required
 def data_table(request):
-    answers = Answer.objects.all()
-    questions = Question.objects.all()
+    answers = Answer.objects.filter(created_by=request.user)
+    questions = Question.objects.filter(created_by=request.user)
     weather_entries = Weather.objects.all()
 
     # Separate the questions based on their types

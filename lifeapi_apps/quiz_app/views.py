@@ -133,6 +133,18 @@ def learn(request):
 
 
 @login_required
+def user_questions(request):
+    # Retrieve all questions created by the currently logged-in user
+    user_questions = Question.objects.filter(created_by=request.user)
+
+    context = {
+        'user_questions': user_questions,
+    }
+
+    return render(request, 'user_questions.html', context)
+
+
+@login_required
 def add_question(request):
     if request.method == 'POST':
         # Retrieve question details from the form submission
@@ -143,6 +155,53 @@ def add_question(request):
         new_question = Question(description=description, type=question_type, created_by=request.user)
         new_question.save()
 
-        return redirect('data_table')  # Redirect to the home page after adding the question
+        return redirect('user_questions')  # Redirect to the home page after adding the question
 
     return render(request, 'add_question.html')
+
+
+@login_required
+def edit_question(request, question_id):
+    try:
+        # Retrieve the question based on the provided question_id
+        question = Question.objects.get(id=question_id)
+
+        # Check if the logged-in user is the creator of the question
+        if question.created_by == request.user:
+            if request.method == 'POST':
+                # Update the question details based on the form submission
+                question.description = request.POST.get('description')
+                question.type = request.POST.get('question_type', 'Text')  # Default to 'Text' if not provided
+                question.save()
+
+                return redirect('user_questions')  # Redirect to the list of user questions
+
+            context = {
+                'question': question,
+            }
+
+            return render(request, 'edit_question.html', context)
+
+    except Question.DoesNotExist:
+        pass  # Handle the case where the question doesn't exist or is not owned by the user
+
+    # Redirect to the list of user questions if the user doesn't have permission to edit
+    return redirect('list_user_questions')
+
+
+@login_required
+def delete_question(request, question_id):
+    try:
+        # Retrieve the question based on the provided question_id
+        question = Question.objects.get(id=question_id)
+
+        # Check if the logged-in user is the creator of the question
+        if question.created_by == request.user:
+            # Delete the question
+            question.delete()
+
+    except Question.DoesNotExist:
+        pass  # Handle the case where the question doesn't exist or is not owned by the user
+
+    # Redirect to the list of user questions after deleting or in case of any issues
+    return redirect('user_questions')

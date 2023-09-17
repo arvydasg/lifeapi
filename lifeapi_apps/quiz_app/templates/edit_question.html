@@ -7,14 +7,6 @@
         {% csrf_token %}
         <label for="description">Description:</label>
         <input type="text" id="description" name="description" value="{{ question.description }}" required>
-        
-        <label for="question_type">Type:</label>
-        <select id="question_type" name="question_type">
-            <option value="Text" {% if question.type == 'Text' %}selected{% endif %}>Text</option>
-            <option value="YN" {% if question.type == 'YN' %}selected{% endif %}>Yes/No</option>
-            <option value="Scale" {% if question.type == 'Scale' %}selected{% endif %}>Scale 1-5</option>
-        </select>
-
         <button type="submit">Save Changes</button>
     </form>
 

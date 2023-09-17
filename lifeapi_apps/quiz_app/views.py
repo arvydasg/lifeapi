@@ -90,46 +90,13 @@ def data_table(request):
     questions = Question.objects.filter(created_by=request.user)
     weather_entries = Weather.objects.all()
 
-    # Separate the questions based on their types
-    yn_questions = questions.filter(type='YN').prefetch_related('answer_set')
-    scale_questions = questions.filter(type='Scale').prefetch_related('answer_set')
-    text_questions = questions.filter(type='Text').prefetch_related('answer_set')
-
     context = {
-        'yn_questions': yn_questions,
-        'scale_questions': scale_questions,
-        'text_questions': text_questions,
+        'questions': questions,
         'weather_entries': weather_entries,
         'answers': answers,
     }
 
     return render(request, 'data_table.html', context)
-
-
-@login_required
-def journal(request):
-    journal_question = Question.objects.get(description="Journal")
-    answers = journal_question.answer_set.all()
-
-    context = {
-        'question': journal_question,
-        'answers': answers,
-    }
-
-    return render(request, 'journal.html', context)
-
-
-@login_required
-def learn(request):
-    learn = Question.objects.get(description="Learn")
-    answers = learn.answer_set.all()
-
-    context = {
-        'learn': learn,
-        'answers': answers,
-    }
-
-    return render(request, 'learn.html', context)
 
 
 @login_required
@@ -149,10 +116,9 @@ def add_question(request):
     if request.method == 'POST':
         # Retrieve question details from the form submission
         description = request.POST.get('description')
-        question_type = request.POST.get('question_type', 'Text')  # Default to 'Text' if not provided
 
         # Create a new question
-        new_question = Question(description=description, type=question_type, created_by=request.user)
+        new_question = Question(description=description, created_by=request.user)
         new_question.save()
 
         return redirect('user_questions')  # Redirect to the home page after adding the question
@@ -171,7 +137,6 @@ def edit_question(request, question_id):
             if request.method == 'POST':
                 # Update the question details based on the form submission
                 question.description = request.POST.get('description')
-                question.type = request.POST.get('question_type', 'Text')  # Default to 'Text' if not provided
                 question.save()
 
                 return redirect('user_questions')  # Redirect to the list of user questions

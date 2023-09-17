@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Question, Answer
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('description', 'type', 'created_by')
+    list_display = ('description', 'created_by')
 
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('formatted_date_added', 'question', 'answer', 'created_by')

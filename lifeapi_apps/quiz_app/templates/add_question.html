@@ -5,15 +5,7 @@
     <form method="POST">
         {% csrf_token %}
         <label for="description">Question Description:</label>
-        <textarea id="description" name="description" required></textarea><br>
-        
-        <label for="question_type">Question Type:</label>
-        <select id="question_type" name="question_type">
-            <option value="Text">Text</option>
-            <option value="YN">Yes/No</option>
-            <option value="Scale">Scale 1-5</option>
-        </select><br>
-        
+        <textarea id="description" name="description" required></textarea><br>        
         <input type="submit" value="Add Question">
     </form>
 {% endblock %}

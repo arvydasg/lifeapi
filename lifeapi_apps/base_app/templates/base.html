@@ -44,10 +44,6 @@
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'quiz_app_home' %}">Home</a>
                     <a class="dropdown-item" href="{% url 'data_table' %}">Data Table</a>
-                    {% if user.is_authenticated and user.id == 1 %}
-                    <a class="dropdown-item" href="{% url 'journal' %}">Journal</a>
-                    <a class="dropdown-item" href="{% url 'learn' %}">Learn</a>
-                    {% endif %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'quiz_start' %}">Start quiz</a>
                     <a class="dropdown-item" href="{% url 'user_questions' %}">All my questions</a>

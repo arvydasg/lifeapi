@@ -7,7 +7,7 @@
         <button type="submit" name="start_quiz">Start Quiz</button>
     </form>
 
-    <form action="{% url 'quiz_start' %}" method="POST">
+    <form action="{% url 'quiz_start' %}" method="POST" onsubmit="return confirm('Are you sure you want to delete your answers for today?');">
         {% csrf_token %}
         <button type="submit" name="delete_answers">Delete My Answers for Today</button>
     </form>

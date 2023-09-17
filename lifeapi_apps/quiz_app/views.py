@@ -116,10 +116,9 @@ def add_question(request):
     if request.method == 'POST':
         # Retrieve question details from the form submission
         description = request.POST.get('description')
-        sequence = request.POST.get('sequence')
 
         # Create a new question
-        new_question = Question(description=description, sequence=sequence, created_by=request.user)
+        new_question = Question(description=description, created_by=request.user)
         new_question.save()
 
         return redirect('user_questions')  # Redirect to the home page after adding the question
@@ -138,7 +137,6 @@ def edit_question(request, question_id):
             if request.method == 'POST':
                 # Update the question details based on the form submission
                 question.description = request.POST.get('description')
-                question.sequence = request.POST.get('sequence')
                 question.save()
 
                 return redirect('user_questions')  # Redirect to the list of user questions

@@ -121,13 +121,13 @@
     <script>
       $("#example").DataTable({
         // Datatables configurations
-        paging: true,
-        pageLength: 10,
-        lengthChange: true,
-        autoWidth: true,
-        searching: true,
-        bInfo: true,
-        bSort: true,
+        paging: true, // Pagination
+        pageLength: 10, // Data per page
+        lengthChange: true, // Show entries per page
+        autoWidth: true, // Control the auto width of columns
+        searching: true, // Input search
+        bInfo: true, // Info on footer
+        bSort: true, // Filter A to Z, Z to A (and numbers)
         order: [[0, 'desc']],
 
         // Disable A to Z, Z to A in actions column
@@ -135,6 +135,14 @@
           "targets": [1, 4],
           "orderable": false
         }]
+      })
+
+      $("#zdrf").DataTable({
+        paging: true, // Pagination
+        pageLength: 10, // Data per page
+        bInfo: false, // Info on footer
+        searching: true, // Input search
+        bSort: false, // Filter A to Z, Z to A (and numbers)
       })
     </script>
   </body>

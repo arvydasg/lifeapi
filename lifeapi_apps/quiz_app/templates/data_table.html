@@ -10,16 +10,8 @@
                 <tr>
                     <th class="vertical wide-column">Date</th>
                     <th class="vertical">Temperature</th>
-                    {% for question in yn_questions %}
+                    {% for question in questions %}
                         <th class="vertical">{{ question.description }}</th>
-                    {% endfor %}
-                    {% for question in scale_questions %}
-                        <th class="vertical">{{ question.description }}</th>
-                    {% endfor %}
-                    {% for question in text_questions %}
-                        {% if question.description != "Journal" and question.description != "Learn" %}
-                            <th class="vertical">{{ question.description }}</th>
-                        {% endif %}
                     {% endfor %}
                 </tr>
             </thead>
@@ -28,28 +20,12 @@
                     <tr>
                         <td>{{ weather_entry.date|date:"Y-m-d" }}</td>
                         <td>{{ weather_entry.temperature }}</td>
-                        {% for question in yn_questions %}
+                        {% for question in questions %}
                             {% for answer in question.answer_set.all %}
                                 {% if answer.date_added.date == weather_entry.date %}
                                     <td class="answer-field">{% if answer.answer == 'YES' %}<span class="green">{{ answer.answer }}</span>{% elif answer.answer == 'NO' %}<span class="red">{{ answer.answer }}</span>{% endif %}</td>
                                 {% endif %}
                             {% endfor %}
-                        {% endfor %}
-                        {% for question in scale_questions %}
-                            {% for answer in question.answer_set.all %}
-                                {% if answer.date_added.date == weather_entry.date %}
-                                    <td class="answer-field">{{ answer.answer }}</td>
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-                        {% for question in text_questions %}
-                            {% if question.description != "Journal" and question.description != "Learn" %}
-                                {% for answer in question.answer_set.all %}
-                                    {% if answer.date_added.date == weather_entry.date %}
-                                        <td class="answer-field">{{ answer.answer }}</td>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
                         {% endfor %}
                     </tr>
                 {% endfor %}

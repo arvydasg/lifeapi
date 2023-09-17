@@ -10,19 +10,9 @@
             <form action="{% url 'quiz_question' question_id=question.id %}" method="POST" class="text-center">
                 {% csrf_token %}
                 <input type="hidden" name="question_id" value="{{ question.id }}">
-                
-                {% if question.type == 'YN' %}
-                    <input type="hidden" name="answer" value="">
-                    <button type="submit" name="answer" value="YES" class="btn btn-success btn-lg mx-2">YES</button>
-                    <button type="submit" name="answer" value="NO" class="btn btn-danger btn-lg mx-2">NO</button>
-                {% elif question.type == 'Scale' %}
-                    {% for i in 1|custom_range:6 %}
-                        <button type="submit" name="answer" value="{{ i }}" class="btn btn-primary btn-lg mx-2">{{ i }}</button>
-                    {% endfor %}
-                {% else %}
-                    <input type="text" name="answer" placeholder="Enter your answer" required>
-                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                {% endif %}
+                <input type="hidden" name="answer" value="">
+                <button type="submit" name="answer" value="YES" class="btn btn-success btn-lg mx-2">YES</button>
+                <button type="submit" name="answer" value="NO" class="btn btn-danger btn-lg mx-2">NO</button>
             </form>
         </div>
     </div>

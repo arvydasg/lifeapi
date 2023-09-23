@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Data Table Test</h2>
+    <p>Total number of answers in your({{user}}) database: {{ answers|length }}</p>
+
+    <div class="table-responsive">
+        <table class="table" id="zdrf">
+            <thead>
+                <tr>
+                    <th class="vertical wide-column">Date</th>
+                    <th class="vertical">Temperature</th>
+                    {% for question in questions %}
+                        <th class="vertical">{{ question.description }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for weather_entry in weather_entries|dictsortreversed:'date' %}
+                    <tr>
+                        <td>{{ weather_entry.date|date:"Y-m-d" }}</td>
+                        <td>{{ weather_entry.temperature }}</td>
+                        {% for question in questions %}
+                            {% for answer in question.answer_set.all %}
+                                {% if answer.date_added.date == weather_entry.date %}
+                                    <td class="answer-field">{% if answer.answer == 'YES' %}<span class="green">{{ answer.answer }}</span>{% elif answer.answer == 'NO' %}<span class="red">{{ answer.answer }}</span>{% endif %}</td>
+                                    {% else %}
+                                    <td>-</td>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

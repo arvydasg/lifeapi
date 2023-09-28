@@ -99,29 +99,22 @@ def data_table(request):
     return render(request, 'data_table.html', context)
 
 
+# in base.html the link to this view is visible only for the members of the data_table_test group
+# it would be nice to make it not ACCESSIBLE to those that are not members of data_table_test
+# but could not make it work
 @login_required
 def data_table_test(request):
+    answers = Answer.objects.filter(created_by=request.user)
+    questions = Question.objects.filter(created_by=request.user)
+    weather_entries = Weather.objects.all()
 
-    # Define a custom function to check if the user has ID 1
-    # I want the data_table_test to be accessible ONLY for me
-    def is_user_with_id_1(user):
-        return user.id == 1
+    context = {
+        'questions': questions,
+        'weather_entries': weather_entries,
+        'answers': answers,
+    }
 
-    if is_user_with_id_1(request.user):
-        answers = Answer.objects.filter(created_by=request.user)
-        questions = Question.objects.filter(created_by=request.user)
-        weather_entries = Weather.objects.all()
-
-        context = {
-            'questions': questions,
-            'weather_entries': weather_entries,
-            'answers': answers,
-        }
-
-        return render(request, 'data_table_test.html', context)
-    else:
-        messages.error(request, "Sorry, this is only for the root user.")
-        return redirect('data_table')
+    return render(request, 'data_table_test.html', context)
 
 
 @login_required

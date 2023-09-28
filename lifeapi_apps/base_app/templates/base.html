@@ -44,7 +44,7 @@
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'quiz_app_home' %}">Home</a>
                     <a class="dropdown-item" href="{% url 'data_table' %}">Data Table</a>
-                    {% if user.id == 1 %}
+                    {% if is_data_table_test_member %}
                       <a class="dropdown-item" href="{% url 'data_table_test' %}">Data Table Test</a>
                     {% endif %}
                     <div class="dropdown-divider"></div>

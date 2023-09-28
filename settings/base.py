@@ -77,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'lifeapi_apps.quiz_app.context_processors.data_table_test_status',
             ],
         },
     },

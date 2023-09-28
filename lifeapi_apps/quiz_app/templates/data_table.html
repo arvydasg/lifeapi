@@ -5,7 +5,7 @@
     <p>Total number of answers in your({{user}}) database: {{ answers|length }}</p>
 
     <div class="table-responsive">
-        <table class="table" id="zdrf">
+        <table class="table">
             <thead>
                 <tr>
                     <th class="vertical wide-column">Date</th>
@@ -24,8 +24,6 @@
                             {% for answer in question.answer_set.all %}
                                 {% if answer.date_added.date == weather_entry.date %}
                                     <td class="answer-field">{% if answer.answer == 'YES' %}<span class="green">{{ answer.answer }}</span>{% elif answer.answer == 'NO' %}<span class="red">{{ answer.answer }}</span>{% endif %}</td>
-                                    {% else %}
-                                    <td>-</td>
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}

@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
+<!-- foreign key relationship of Answer TO Question model allows to use answer_set. "reverse relation"!!!! -->
+
 {% block content %}
+
     <h2>Data Table</h2>
-    <p>Total number of answers in your({{user}}) database: {{ answers|length }}</p>
+    <p>Total number of answers in your ({{ user }}) database: {{ answers|length }}</p>
 
     <div class="table-responsive">
-        <table class="table">
+        <table class="table" id="data_table">
             <thead>
                 <tr>
                     <th class="vertical wide-column">Date</th>
@@ -16,20 +19,23 @@
                 </tr>
             </thead>
             <tbody>
-                {% for weather_entry in weather_entries|dictsortreversed:'date' %}
+                {% for entry in data_to_display|dictsortreversed:'date' %}
                     <tr>
-                        <td>{{ weather_entry.date|date:"Y-m-d" }}</td>
-                        <td>{{ weather_entry.temperature }}</td>
-                        {% for question in questions %}
-                            {% for answer in question.answer_set.all %}
-                                {% if answer.date_added.date == weather_entry.date %}
-                                    <td class="answer-field">{% if answer.answer == 'YES' %}<span class="green">{{ answer.answer }}</span>{% elif answer.answer == 'NO' %}<span class="red">{{ answer.answer }}</span>{% endif %}</td>
+                        <td>{{ entry.date|date:"Y-m-d" }}</td>
+                        <td>{{ entry.temperature }}</td>
+                        {% for answer in entry.answers %}
+                            <td class="answer-field">
+                                {% if answer.answer == 'YES' %}
+                                    <span class="green">{{ answer.answer }}</span>
+                                {% elif answer.answer == 'NO' %}
+                                    <span class="red">{{ answer.answer }}</span>
                                 {% endif %}
-                            {% endfor %}
+                            </td>
                         {% endfor %}
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+      
 {% endblock %}

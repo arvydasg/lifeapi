@@ -122,6 +122,13 @@
     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
     <!-- Datatables script -->
     <script>
+      $("#data_table").DataTable({
+        paging: true, // Pagination
+        pageLength: 7, // Data per page
+        bInfo: false, // Info on footer
+        searching: true, // Input search
+        bSort: false, // Filter A to Z, Z to A (and numbers)
+      })
       $("#data_table_test").DataTable({
         paging: true, // Pagination
         pageLength: 7, // Data per page

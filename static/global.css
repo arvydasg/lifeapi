@@ -21,3 +21,10 @@ header.authenticated {
     background-color: green !important;
     padding-bottom: 2px;
 }
+
+th:first-child, td:first-child
+{
+  position:sticky;
+  left:0px;
+  background-color:lightgray;
+}

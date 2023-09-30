@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
+<!-- foreign key relationship of Answer TO Question model allows to use answer_set. "reverse relation"!!!! -->
+
 {% block content %}
-    <h2>Data Table Test</h2>
-    <p>Total number of answers in your({{user}}) database: {{ answers|length }}</p>
+
+    <h2>Data Table</h2>
+    <p>Total number of answers in your ({{ user }}) database: {{ answers|length }}</p>
 
     <div class="table-responsive">
         <table class="table" id="zdrf">
@@ -16,22 +19,71 @@
                 </tr>
             </thead>
             <tbody>
-                {% for weather_entry in weather_entries|dictsortreversed:'date' %}
+                {% for entry in data_to_display|dictsortreversed:'date' %}
                     <tr>
-                        <td>{{ weather_entry.date|date:"Y-m-d" }}</td>
-                        <td>{{ weather_entry.temperature }}</td>
-                        {% for question in questions %}
-                            {% for answer in question.answer_set.all %}
-                                {% if answer.date_added.date == weather_entry.date %}
-                                    <td class="answer-field">{% if answer.answer == 'YES' %}<span class="green">{{ answer.answer }}</span>{% elif answer.answer == 'NO' %}<span class="red">{{ answer.answer }}</span>{% endif %}</td>
-                                    {% else %}
-                                    <td>-</td>
+                        <td>{{ entry.date|date:"Y-m-d" }}</td>
+                        <td>{{ entry.temperature }}</td>
+                        {% for answer in entry.answers %}
+                            <td class="answer-field">
+                                {% if answer.answer == 'YES' %}
+                                    <span class="green">{{ answer.answer }}</span>
+                                {% elif answer.answer == 'NO' %}
+                                    <span class="red">{{ answer.answer }}</span>
                                 {% endif %}
-                            {% endfor %}
+                            </td>
                         {% endfor %}
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+
+
+    <!-- <h2>ALL DATA</h2>
+
+    <p>questions - {{questions}}</p>
+    <p>weather_entries - {{weather_entries}}</p>
+    <p>answers - {{answers}}</p>
+
+    <h2>MODIFIED</h2>
+
+    {% for question in questions %}
+        {% if question.id == 11 %}
+            <p>Question ID 11: {{ question.description }}</p>
+        {% endif %}
+    {% endfor %}
+
+    <p>Question IDs:</p>
+
+    {% for question in questions %}
+        <li>Question ID: {{ question.id }} {{question.description}}</li>
+    {% endfor %}
+
+    {% for question in questions %}
+        {% for answer in question.answer_set.all %}
+            {% if answer.date_added.date == weather_entry.date %}
+                <td class="answer-field">{% if answer.answer == 'YES' %}<span class="green">{{ answer.answer }}</span>{% elif answer.answer == 'NO' %}<span class="red">{{ answer.answer }}</span>{% endif %}</td>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+   <ul>
+        {% for question in questions %}
+        <li>
+            {{ question.description }} -
+            <ul>
+                {% for answer in question.answer_set.all %} 
+                <li>{{ answer.answer }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Weather stuff</h2>
+
+    {% for weather_entry in weather_entries %}
+        <p>{{ weather_entry.date }} - {{ weather_entry.temperature }} </p>
+    {% endfor %} -->
+      
 {% endblock %}

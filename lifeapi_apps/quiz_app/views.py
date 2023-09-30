@@ -108,11 +108,35 @@ def data_table_test(request):
     questions = Question.objects.filter(created_by=request.user)
     weather_entries = Weather.objects.all()
 
+    data_to_display = []
+
+    for weather_entry in weather_entries:
+        matching_answers = []
+
+        for question in questions:
+            corresponding_answer = question.answer_set.filter(date_added__date=weather_entry.date).first()
+            if corresponding_answer:
+                matching_answers.append({
+                    'description': question.description,
+                    'answer': corresponding_answer.answer,
+                })
+
+        if matching_answers:
+            data_to_display.append({
+                'date': weather_entry.date,
+                'temperature': weather_entry.temperature,
+                'answers': matching_answers,
+            })
+
     context = {
+        'user': request.user,
+        'answers': Answer.objects.filter(created_by=request.user),
+        'data_to_display': data_to_display,
         'questions': questions,
-        'weather_entries': weather_entries,
-        'answers': answers,
     }
+
+    print(data_to_display)
+
 
     return render(request, 'data_table_test.html', context)
 

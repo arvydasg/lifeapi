@@ -122,22 +122,12 @@
     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
     <!-- Datatables script -->
     <script>
-      $("#example").DataTable({
-        // Datatables configurations
-        paging: true,
-        pageLength: 10,
-        lengthChange: true,
-        autoWidth: true,
-        searching: true,
-        bInfo: true,
-        bSort: true,
-        order: [[0, 'desc']],
-
-        // Disable A to Z, Z to A in actions column
-        "columnDefs": [{
-          "targets": [1, 4],
-          "orderable": false
-        }]
+      $("#data_table_test").DataTable({
+        paging: true, // Pagination
+        pageLength: 7, // Data per page
+        bInfo: false, // Info on footer
+        searching: true, // Input search
+        bSort: false, // Filter A to Z, Z to A (and numbers)
       })
     </script>
   </body>

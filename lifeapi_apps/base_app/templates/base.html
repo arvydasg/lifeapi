@@ -123,19 +123,27 @@
     <!-- Datatables script -->
     <script>
       $("#data_table").DataTable({
-        paging: true, // Pagination
-        pageLength: 7, // Data per page
-        bInfo: false, // Info on footer
-        searching: true, // Input search
-        bSort: false, // Filter A to Z, Z to A (and numbers)
-      })
+      paging: true, // Pagination
+      pageLength: 7, // Data per page
+      bInfo: false, // Info on footer
+      searching: true, // Input search
+      bSort: true, // Filter A to Z, Z to A (and numbers)
+      columnDefs: [
+        { targets: [0, 1], orderable: true }, // Define columns to be sortable
+        { targets: '_all', orderable: false } // Disable sorting for all other columns
+      ]
+      }); 
       $("#data_table_test").DataTable({
-        paging: true, // Pagination
-        pageLength: 7, // Data per page
-        bInfo: false, // Info on footer
-        searching: true, // Input search
-        bSort: false, // Filter A to Z, Z to A (and numbers)
-      })
-    </script>
+      paging: true, // Pagination
+      pageLength: 7, // Data per page
+      bInfo: false, // Info on footer
+      searching: true, // Input search
+      bSort: true, // Filter A to Z, Z to A (and numbers)
+      columnDefs: [
+        { targets: [0, 1], orderable: true }, // Define columns to be sortable
+        { targets: '_all', orderable: false } // Disable sorting for all other columns
+      ]
+      }); 
+      </script>
   </body>
 </html>

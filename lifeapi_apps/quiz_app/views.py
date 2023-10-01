@@ -102,6 +102,12 @@ def data_table(request):
                     'description': question.description,
                     'answer': corresponding_answer.answer,
                 })
+            else:
+            # If there's no corresponding answer, add an empty answer
+                matching_answers.append({
+                'description': question.description,
+                'answer': '',
+            })
 
         if matching_answers:
             data_to_display.append({

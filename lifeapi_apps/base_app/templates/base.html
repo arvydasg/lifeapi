@@ -131,7 +131,8 @@
       columnDefs: [
         { targets: [0, 1], orderable: true }, // Define columns to be sortable
         { targets: '_all', orderable: false } // Disable sorting for all other columns
-      ]
+      ],
+      order: [[0, 'desc']] // Set default sorting to the first column (date) in descending order
       }); 
       $("#data_table_test").DataTable({
       paging: true, // Pagination
@@ -142,7 +143,8 @@
       columnDefs: [
         { targets: [0, 1], orderable: true }, // Define columns to be sortable
         { targets: '_all', orderable: false } // Disable sorting for all other columns
-      ]
+      ],
+      order: [[0, 'desc']] // Set default sorting to the first column (date) in descending order
       }); 
       </script>
   </body>

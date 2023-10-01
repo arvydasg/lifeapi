@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for entry in data_to_display|dictsortreversed:'date' %}
+                {% for entry in data_to_display %}
                     <tr>
                         <td>{{ entry.date|date:"Y-m-d" }}</td>
                         <td>{{ entry.temperature }}</td>

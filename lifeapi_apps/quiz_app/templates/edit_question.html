@@ -1,14 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<h1>Edit Question</h1>
 
-{% block content %}
-    <h1>Edit Question</h1>
+<form method="post">
+  {% csrf_token %}
+  <label for="description">Description:</label>
+  <input
+    type="text"
+    id="description"
+    name="description"
+    value="{{ question.description }}"
+    required
+  />
+  <button type="submit">Save Changes</button>
+</form>
 
-    <form method="post">
-        {% csrf_token %}
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" value="{{ question.description }}" required>
-        <button type="submit">Save Changes</button>
-    </form>
-
-    <a href="{% url 'user_questions' %}">Cancel</a>
+<a href="{% url 'user_questions' %}">Cancel</a>
 {% endblock %}

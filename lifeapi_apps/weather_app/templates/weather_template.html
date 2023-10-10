@@ -1,10 +1,8 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <h2>Here you can see the Most recent weather fetch from the last DB entry.</h2>
-    <p>To get a more recent version, run the <b>weather_job.py</b> script.</p>
-    <!-- data that is fetched from an api  -->
-    <!-- <h1>Weather Information</h1>
+{% extends 'base.html' %} {% block content %}
+<h2>Here you can see the Most recent weather fetch from the last DB entry.</h2>
+<p>To get a more recent version, run the <b>weather_job.py</b> script.</p>
+<!-- data that is fetched from an api  -->
+<!-- <h1>Weather Information</h1>
     {% if observation %}
         <p>Observation Time: {{ observation.observationTimeUtc }}</p>
         <p>Air Temperature: {{ observation.airTemperature }}</p>
@@ -21,11 +19,10 @@
         <p>No observation found for the specified time.</p>
     {% endif %} -->
 
-    <!-- data fetched from the db an api  -->
-    {% if weather_from_db %}
-        <p>Observation Time: {{ weather_from_db.date|date:"Y-m-d" }}</p>
-        <p>Temperature: {{ weather_from_db.temperature }}</p>
-    {% else %}
-        <p>No observation found.</p>
-    {% endif %}
-{% endblock %}
+<!-- data fetched from the db an api  -->
+{% if weather_from_db %}
+<p>Observation Time: {{ weather_from_db.date|date:"Y-m-d" }}</p>
+<p>Temperature: {{ weather_from_db.temperature }}</p>
+{% else %}
+<p>No observation found.</p>
+{% endif %} {% endblock %}

@@ -1,18 +1,64 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<h2>Ready to start the quiz?</h2>
 
-{% block content %}
-    <h2>Ready to start the quiz?</h2>
-    <form action="{% url 'quiz_start' %}" method="POST">
-        {% csrf_token %}
-        <button type="submit" name="start_quiz">Start Quiz</button>
-    </form>
+<!-- Start Quiz for Today -->
+<form action="{% url 'quiz_start' %}" method="POST">
+  {% csrf_token %}
+  <button type="submit" name="start_quiz" class="btn btn-primary">
+    Start quiz for TODAY
+  </button>
+</form>
 
-    <form action="{% url 'quiz_start' %}" method="POST" onsubmit="return confirm('Are you sure you want to delete your answers for today?');">
-        {% csrf_token %}
-        <button type="submit" name="delete_answers">Delete My Answers for Today</button>
-    </form>
+<br />
 
-    {% for message in messages %}
-        <div class="flash-message">{{ message }}</div>
-    {% endfor %}
+<!-- Delete Answers for Today -->
+<form
+  action="{% url 'quiz_start' %}"
+  method="POST"
+  onsubmit="return confirm('Are you sure you want to delete your answers for today?');"
+>
+  {% csrf_token %}
+  <button type="submit" name="delete_answers" class="btn btn-danger">
+    Delete answers for TODAY
+  </button>
+</form>
+
+<br />
+
+<div style="background-color: antiquewhite; padding: 20px">
+  <h1>Pagalba</h1>
+  <ul>
+    <li>Forgot to do the quiz for a specific day?</li>
+    <li>Or want to delete all answers of a specific day?</li>
+    <li>No worries, do it all here!</li>
+  </ul>
+
+  <!-- start quiz / delete answers for specific day -->
+  <form action="{% url 'quiz_start' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="selected_date">Select a date:</label>
+      <input
+        type="date"
+        id="selected_date"
+        name="selected_date"
+        class="form-control"
+        required
+      />
+    </div>
+
+    <button type="submit" name="start_quiz" class="btn btn-primary">
+      Start Quiz for selected day
+    </button>
+
+    <button
+      type="submit"
+      name="delete_answers"
+      class="btn btn-danger"
+      onclick="return confirm('Are you sure you want to delete your answers for the ' + document.getElementById('selected_date').value + '?');"
+    >
+      Delete answers for selected day
+    </button>
+  </form>
+</div>
 {% endblock %}

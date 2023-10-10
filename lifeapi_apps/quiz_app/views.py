@@ -18,25 +18,38 @@ def quiz_start(request):
     if request.method == 'POST':
         # Check if the user clicked the "Start Quiz" button
         if 'start_quiz' in request.POST:
-            # Check if entries for today already exist
-            today = date.today()
-            if Answer.objects.filter(date_added__date=today, created_by=request.user).exists():
-                messages.warning(request, "You have already answered the quiz for today.")
+            if 'selected_date' in request.POST:
+                # take the selected date from the form, which is in request now
+                selected_date = request.POST.get('selected_date')
+                # store the selected date variable in session so its retrievable from other views(quiz_question)
+                request.session['selected_date'] = selected_date
+            else:
+                # must convert this taken date to fit into session variable
+                selected_date = date.today().isoformat()
+                request.session['selected_date'] = selected_date
+
+            if Answer.objects.filter(date_added__date=selected_date, created_by=request.user).exists():
+                messages.warning(request, "You have already answered the quiz for that day.")
             else:
                 # Retrieve the first question from the database
                 first_question = Question.objects.filter(created_by=request.user).first()
 
                 context = {
-                    'question': first_question
+                    'question': first_question,
+                    'selected_date': selected_date
                 }
-                
+                    
                 return render(request, 'quiz_app_question.html', context)
-
+            
         # Check if the user clicked the "Delete Answers" button
         elif 'delete_answers' in request.POST:
-            today = date.today()
-            Answer.objects.filter(date_added__date=today, created_by=request.user).delete()
-            messages.success(request, "Your answers for today have been deleted.")
+            if 'selected_date' in request.POST:
+                selected_date = request.POST.get('selected_date')
+            else:
+                selected_date = date.today()
+
+            Answer.objects.filter(date_added__date=selected_date, created_by=request.user).delete()
+            messages.success(request, f"Your answers for chosen day have been deleted for {selected_date}")
 
     # Retrieve any flash messages and pass them to the template context
     messages_to_display = messages.get_messages(request)
@@ -58,8 +71,12 @@ def quiz_question(request, question_id):
         # Get the currently logged-in user
         user = request.user
 
+        # Retrieve selected_date from POST data session cookie
+        selected_date = request.session.get('selected_date')
+
         # Save the answer to the database
-        answer = Answer(question_id=question_id, answer=answer_text, created_by=user)
+        answer = Answer(question_id=question_id, answer=answer_text, date_added=selected_date, created_by=user)
+
         answer.save()
 
         # use queryset filtering to find the next question with an id greater than the current question_id. 
@@ -68,7 +85,10 @@ def quiz_question(request, question_id):
         try:
             next_question = Question.objects.filter(id__gt=question_id, created_by=request.user).order_by('id').first()
             if next_question:
-                return render(request, 'quiz_app_question.html', {'question': next_question})
+                return render(request, 'quiz_app_question.html', {
+                    'question': next_question,
+                    'selected_date': selected_date
+                    })
             else:
                 return redirect('data_table')
         except Question.DoesNotExist:
@@ -123,9 +143,6 @@ def data_table(request):
         'questions': questions,
     }
 
-    print(data_to_display)
-
-
     return render(request, 'data_table.html', context)
 
 
@@ -170,8 +187,6 @@ def data_table_test(request):
         'data_to_display': data_to_display,
         'questions': questions,
     }
-
-    print(data_to_display)
 
     return render(request, 'data_table_test.html', context)
 

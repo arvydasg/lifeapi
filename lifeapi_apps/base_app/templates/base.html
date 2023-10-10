@@ -1,113 +1,194 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <title>Lifeapi</title>
-      {% load static %}
-      <!-- Include Bootstrap CSS -->
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-      <!-- Personal global CSS -->
-      <link rel="stylesheet" href="{% static 'global.css' %}">
-      <!-- Datatables CSS -->
-      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
-      <!-- Font Awesome -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+    <title>Lifeapi</title>
+    {% load static %}
+    <!-- Include Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <!-- Personal global CSS -->
+    <link rel="stylesheet" href="{% static 'global.css' %}" />
+    <!-- Datatables CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
   <body>
     <!-- Header -->
-    <header {% if user.is_authenticated %} class="authenticated"{% endif %}>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">
-              <img src="https://static.vecteezy.com/system/resources/thumbnails/000/512/631/small/58_Repeat_II.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
-              Lifeapi
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <!-- Weather app -->
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Weather app
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'weather_app_home' %}">Home</a>
-                    <a class="dropdown-item" href="{% url 'weather_app_display_from_db' %}">Latest fetch</a>                    
-                  </div>
-                </li>
-                <!-- Quiz app -->
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Quiz app
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'quiz_app_home' %}">Home</a>
-                    <a class="dropdown-item" href="{% url 'data_table' %}">Data Table</a>
-                    {% if is_data_table_test_member %}
-                      <a class="dropdown-item" href="{% url 'data_table_test' %}">Data Table Test</a>
-                    {% endif %}
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'quiz_start' %}">Start quiz</a>
-                    <a class="dropdown-item" href="{% url 'user_questions' %}">All my questions</a>
-                  </div>
-                </li>
-                <!-- Website_fixes app -->
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Website_fixes app
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'website_fixes_app_home' %}">Home</a>
-                    <a class="dropdown-item" href="{% url 'website_fixes' %}">All website fixes</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'add_website_fix' %}">Add website fix</a>
-                  </div>
-                </li>                
-              </ul>
-              <!-- Right-aligned items -->
-              <ul class="navbar-nav ml-auto">
-                {% if user.is_authenticated %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="/admin/">Admin panel</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'members_logout_user' %}">Logout {{user}}</a>
-                  </li>
-                {% else %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'members_login_user' %}">Login</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'members_register_user' %}">Register</a>
-                  </li>
+    <header {% if user.is_authenticated %} class="authenticated" {% endif %}>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/000/512/631/small/58_Repeat_II.jpg"
+            width="30"
+            height="30"
+            class="d-inline-block align-top"
+            alt=""
+          />
+          Lifeapi
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <!-- Weather app -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Weather app
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'weather_app_home' %}"
+                  >Home</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="{% url 'weather_app_display_from_db' %}"
+                  >Latest fetch</a
+                >
+              </div>
+            </li>
+            <!-- Quiz app -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Quiz app
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'quiz_app_home' %}"
+                  >Home</a
+                >
+                <a class="dropdown-item" href="{% url 'data_table' %}"
+                  >Data Table</a
+                >
+                {% if is_data_table_test_member %}
+                <a class="dropdown-item" href="{% url 'data_table_test' %}"
+                  >Data Table Test</a
+                >
                 {% endif %}
-              </ul>
-            </div>
-          </nav>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'quiz_start' %}"
+                  >Start quiz</a
+                >
+                <a class="dropdown-item" href="{% url 'user_questions' %}"
+                  >All my questions</a
+                >
+              </div>
+            </li>
+            <!-- Website_fixes app -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Website_fixes app
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a
+                  class="dropdown-item"
+                  href="{% url 'website_fixes_app_home' %}"
+                  >Home</a
+                >
+                <a class="dropdown-item" href="{% url 'website_fixes' %}"
+                  >All website fixes</a
+                >
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'add_website_fix' %}"
+                  >Add website fix</a
+                >
+              </div>
+            </li>
+          </ul>
+          <!-- Right-aligned items -->
+          <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/">Admin panel</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'members_logout_user' %}"
+                >Logout {{user}}</a
+              >
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'members_login_user' %}"
+                >Login</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'members_register_user' %}"
+                >Register</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
     </header>
 
     <!-- Content -->
     <div class="container mt-4">
-        {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-              {{message}}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          {% endfor %}
-        {% endif %}
-
-        {% block content %}
-        <!-- Default content if not overridden by child templates -->
-        {% endblock %}
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %} {% endif %} {% block content %}
+      <!-- Default content if not overridden by child templates -->
+      {% endblock %}
     </div>
 
     <!-- Footer -->
     <footer class="mt-4 text-center">
-        <p>&copy; 2023 My Website. All rights <span class="red-underline">reserved</span>.</p>
+      <p>
+        &copy; 2023 My Website. All rights
+        <span class="red-underline">reserved</span>.
+      </p>
     </footer>
 
     <!-- Include Bootstrap JS -->
@@ -116,36 +197,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.4.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- Jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
     <!-- Datatables JS-->
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
     <!-- Datatables script -->
     <script>
       $("#data_table").DataTable({
-      paging: true, // Pagination
-      pageLength: 7, // Data per page
-      bInfo: false, // Info on footer
-      searching: true, // Input search
-      bSort: true, // Filter A to Z, Z to A (and numbers)
-      columnDefs: [
-        { targets: [0, 1], orderable: true }, // Define columns to be sortable
-        { targets: '_all', orderable: false } // Disable sorting for all other columns
-      ],
-      order: [[0, 'desc']] // Set default sorting to the first column (date) in descending order
-      }); 
+        paging: true, // Pagination
+        pageLength: 7, // Data per page
+        bInfo: false, // Info on footer
+        searching: true, // Input search
+        bSort: true, // Filter A to Z, Z to A (and numbers)
+        columnDefs: [
+          { targets: [0, 1], orderable: true }, // Define columns to be sortable
+          { targets: "_all", orderable: false }, // Disable sorting for all other columns
+        ],
+        order: [[0, "desc"]], // Set default sorting to the first column (date) in descending order
+      });
       $("#data_table_test").DataTable({
-      paging: true, // Pagination
-      pageLength: 7, // Data per page
-      bInfo: false, // Info on footer
-      searching: true, // Input search
-      bSort: true, // Filter A to Z, Z to A (and numbers)
-      columnDefs: [
-        { targets: [0, 1], orderable: true }, // Define columns to be sortable
-        { targets: '_all', orderable: false } // Disable sorting for all other columns
-      ],
-      order: [[0, 'desc']] // Set default sorting to the first column (date) in descending order
-      }); 
-      </script>
+        paging: true, // Pagination
+        pageLength: 7, // Data per page
+        bInfo: false, // Info on footer
+        searching: true, // Input search
+        bSort: true, // Filter A to Z, Z to A (and numbers)
+        columnDefs: [
+          { targets: [0, 1], orderable: true }, // Define columns to be sortable
+          { targets: "_all", orderable: false }, // Disable sorting for all other columns
+        ],
+        order: [[0, "desc"]], // Set default sorting to the first column (date) in descending order
+      });
+    </script>
   </body>
 </html>

@@ -59,92 +59,15 @@
                 >Quiz start <span class="sr-only">(current)</span></a
               >
             </li>
-
-            <!-- Weather app -->
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'apps' %}"
+                >Apps<span class="sr-only">(current)</span></a
               >
-                Weather app
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'weather_app_home' %}"
-                  >Home</a
-                >
-                <a
-                  class="dropdown-item"
-                  href="{% url 'weather_app_display_from_db' %}"
-                  >Latest fetch</a
-                >
-              </div>
             </li>
-            <!-- Quiz app -->
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'website_fixes' %}"
+                >Website fixes</a
               >
-                Quiz app
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'quiz_app_home' %}"
-                  >Home</a
-                >
-                <a class="dropdown-item" href="{% url 'data_table' %}"
-                  >Data Table</a
-                >
-                {% if is_data_table_test_member %}
-                <a class="dropdown-item" href="{% url 'data_table_test' %}"
-                  >Data Table Test</a
-                >
-                {% endif %}
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'quiz_start' %}"
-                  >Start quiz</a
-                >
-                <a class="dropdown-item" href="{% url 'user_questions' %}"
-                  >All my questions</a
-                >
-              </div>
-            </li>
-            <!-- Website_fixes app -->
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Website_fixes app
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a
-                  class="dropdown-item"
-                  href="{% url 'website_fixes_app_home' %}"
-                  >Home</a
-                >
-                <a class="dropdown-item" href="{% url 'website_fixes' %}"
-                  >All website fixes</a
-                >
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'add_website_fix' %}"
-                  >Add website fix</a
-                >
-              </div>
             </li>
           </ul>
           <!-- Right-aligned items -->

@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Apps</h1>
+
+<h2>Base app</h2>
+<ul>
+  <li><a href="{% url 'home' %}">home</a></li>
+  <li><a href="{% url 'apps' %}">apps</a></li>
+</ul>
+<h2>Members app</h2>
+<ul>
+  <li><a href="{% url 'members_login_user' %}">members_login_user</a></li>
+  <li><a href="{% url 'members_logout_user' %}">members_logout_user</a></li>
+  <li><a href="{% url 'members_register_user' %}">members_register_user</a></li>
+</ul>
+<h2>Quiz app</h2>
+<ul>
+  <li><a href="{% url 'quiz_start' %}">quiz_start</a></li>
+  <li><a href="{% url 'data_table' %}">data_table</a></li>
+  <li><a href="{% url 'data_table_test' %}">data_table_test</a></li>
+  <li><a href="{% url 'add_question' %}">add_question</a></li>
+  <li><a href="{% url 'user_questions' %}">user_questions</a></li>
+</ul>
+<h2>Weather app</h2>
+<ul>
+  <li><a href="{% url 'weather_app_home' %}">home</a></li>
+  <li>
+    <a href="{% url 'weather_app_display_from_db' %}"
+      >weather_app_display_from_db</a
+    >
+  </li>
+</ul>
+<h2>Website fixes app</h2>
+<ul>
+  <li><a href="{% url 'website_fixes_app_home' %}">home</a></li>
+  <li><a href="{% url 'website_fixes' %}">website_fixes</a></li>
+  <li><a href="{% url 'add_website_fix' %}">add_website_fix</a></li>
+</ul>
+
+{% endblock %}

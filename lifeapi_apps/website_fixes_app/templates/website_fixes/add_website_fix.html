@@ -1,14 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4">
+  <h1>Add Website Fix</h1>
 
-{% block content %}
-    <div class="container mt-4">
-        <h1>Add Website Fix</h1>
-
-        <!-- Form to edit the fix -->
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Add new fix</button>
-        </form>
-    </div>
+  <!-- Form to edit the fix -->
+  <form method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Add new fix</button>
+  </form>
+</div>
 {% endblock %}

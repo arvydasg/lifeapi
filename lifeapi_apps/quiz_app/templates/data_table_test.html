@@ -4,42 +4,43 @@
 
 {% block content %}
 
-    <h2>Data Table</h2>
-    <p>Total number of answers in your ({{ user }}) database: {{ answers|length }}</p>
+<h2>Data Table</h2>
+<p>
+  Total number of answers in your ({{ user }}) database: {{ answers|length }}
+</p>
 
-    <div class="table-responsive expand">
-        <table class="table table-bordered" id="data_table_test">
-            <thead>
-                <tr>
-                    <th class="vertical wide-column">Date</th>
-                    <th class="vertical">Temperature</th>
-                    {% for question in questions %}
-                        <th class="vertical">{{ question.description }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for entry in data_to_display %}
-                    <tr>
-                        <td>{{ entry.date|date:"Y-m-d" }}</td>
-                        <td>{{ entry.temperature }}</td>
-                        {% for answer in entry.answers %}
-                            <td class="answer-field">
-                                {% if answer.answer == 'YES' %}
-                                    <span class="green">{{ answer.answer }}</span>
-                                {% elif answer.answer == 'NO' %}
-                                    <span class="red">{{ answer.answer }}</span>
-                                {% endif %}
-                            </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<div class="table-responsive expand">
+  <table class="table table-bordered" id="data_table_test">
+    <thead>
+      <tr>
+        <th class="vertical wide-column">Date</th>
+        <th class="vertical">Temperature</th>
+        {% for question in questions %}
+        <th class="vertical">{{ question.description }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in data_to_display %}
+      <tr>
+        <td>{{ entry.date|date:"Y-m-d" }}</td>
+        <td>{{ entry.temperature }}</td>
+        {% for answer in entry.answers %}
+        <td class="answer-field">
+          {% if answer.answer == 'YES' %}
+          <span class="green">{{ answer.answer }}</span>
+          {% elif answer.answer == 'NO' %}
+          <span class="red">{{ answer.answer }}</span>
+          {% endif %}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
-
-    <!-- <h2>ALL DATA</h2>
+<!-- <h2>ALL DATA</h2>
 
     <p>questions - {{questions}}</p>
     <p>weather_entries - {{weather_entries}}</p>
@@ -85,5 +86,5 @@
     {% for weather_entry in weather_entries %}
         <p>{{ weather_entry.date }} - {{ weather_entry.temperature }} </p>
     {% endfor %} -->
-      
+
 {% endblock %}

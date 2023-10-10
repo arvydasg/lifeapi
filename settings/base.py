@@ -99,7 +99,8 @@ STATIC_ROOT = BASE_DIR / "staticfiles-cdn" # in production, we want cdn
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'lt'
 
 TIME_ZONE = 'UTC'
 

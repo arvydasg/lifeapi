@@ -23,7 +23,8 @@
     <tbody>
       {% for entry in data_to_display %}
       <tr>
-        <td>{{ entry.date|date:"Y-m-d" }}</td>
+        <!-- https://docs.djangoproject.com/en/dev/ref/templates/builtins/?from=olddocs#date -->
+        <td>{{ entry.date|date:"Y-m-d" }}, {{ entry.date|date:"D" }}</td>
         <td>{{ entry.temperature }}</td>
         {% for answer in entry.answers %}
         <td class="answer-field">

@@ -34,3 +34,9 @@ th:first-child, td:first-child
     max-width: 100vw;
     margin-left: calc(-50vw + 50%);
 }
+
+@media (max-width: 768px) {
+    table.table.table-sm {
+      font-size: 8px;
+    }
+  }

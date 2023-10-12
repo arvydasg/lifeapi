@@ -1,5 +1,13 @@
 {% extends 'base.html' %} {% block content %}
 <h1>Welcome to Lifeapi</h1>
+
+<a href="{% url 'quiz_start' %}" class="btn btn-sm btn-primary mb-2"
+  >Quiz start</a
+>
+<a href="{% url 'data_table' %}" class="btn btn-sm btn-secondary mb-2"
+  >Data table</a
+>
+
 <p>
   <script
     type="text/javascript"

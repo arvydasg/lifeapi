@@ -26,4 +26,5 @@ urlpatterns = [
     path("members/", include('django.contrib.auth.urls')),
     path("members/", include("lifeapi_apps.members_app.urls")),
     path("website_fixes/", include("lifeapi_apps.website_fixes_app.urls")),
+    path("rescuetime/", include("lifeapi_apps.rescuetime_app.urls")),
 ]

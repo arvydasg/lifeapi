@@ -77,6 +77,11 @@
               <a class="nav-link" href="/admin/">Admin panel</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'members_dashboard' %}"
+                >{{user}} dashboard</a
+              >
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'members_logout_user' %}"
                 >Logout {{user}}</a
               >

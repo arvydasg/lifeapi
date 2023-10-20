@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4">
+  <h1>Dashboard</h1>
+
+  <h2>{{ user.get_full_name }}</h2>
+
+  <p><strong>Username:</strong> {{ user.username }}</p>
+  <p><strong>Name:</strong> {{ user.get_full_name }}</p>
+  <p><strong>Lastname:</strong> {{ user.get_full_name }}</p>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p>
+    <strong>Rescuetime_api_key:</strong> {{ user.profile.rescuetime_api_key }}
+  </p>
+</div>
+{% endblock %}

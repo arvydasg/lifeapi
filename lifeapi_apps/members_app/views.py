@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -55,3 +56,8 @@ def members_register_user(request):
         form = RegisterUserForm()
 
     return render(request, 'members/members_register.html', {'form': form,})
+
+
+@login_required
+def members_dashboard(request):
+    return render(request, 'members/members_dashboard.html')

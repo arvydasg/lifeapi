@@ -3,6 +3,11 @@ import django
 import os
 from datetime import datetime, timedelta
 
+# appending the path of the project's root directory to sys.path, 
+# ensuring that Python can locate the settings module when you run the script from a different directory.
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
 # Set the DJANGO_SETTINGS_MODULE environment variable
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.development")
 # Configure Django settings

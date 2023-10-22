@@ -87,8 +87,10 @@ def fetch_for_all_users():
             profile = Profile.objects.get(user=user)
             productive_hours, distracting_hours = fetch_from_api(profile.rescuetime_api_key, yesterday_formatted)
             save_to_db(yesterday_formatted, user, productive_hours, distracting_hours)
+            print(f"{yesterday_formatted} - fetch and save for {user} is successful! Productive time: {productive_hours}, distracting time: {distracting_hours}.")
         except Profile.DoesNotExist:
             # basically if user does not have "rescuetime_api_key" entry assigned
+            print(f"profile for {user} does not exist.")
             return None
 
 fetch_for_all_users()

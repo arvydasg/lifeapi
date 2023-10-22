@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Question, Answer
 from lifeapi_apps.weather_app.models import Weather
+from lifeapi_apps.rescuetime_app.models import Rescuetime
 from django.http import HttpResponse
 from django.utils import timezone
 from datetime import date
@@ -108,12 +109,15 @@ def quiz_question(request, question_id):
 def data_table(request):
     answers = Answer.objects.filter(created_by=request.user)
     questions = Question.objects.filter(created_by=request.user)
+    rescuetime_entries = Rescuetime.objects.filter(user=request.user)
     weather_entries = Weather.objects.all()
 
     data_to_display = []
 
     for weather_entry in weather_entries:
         matching_answers = []
+        productive_hours = None
+        distracting_hours = None
 
         for question in questions:
             corresponding_answer = question.answer_set.filter(date_added__date=weather_entry.date).first()
@@ -129,11 +133,21 @@ def data_table(request):
                 'answer': '',
             })
 
+        # Find the matching Rescuetime entry for the weather entry's date
+        for rescuetime_entry in rescuetime_entries:
+            if rescuetime_entry.date == weather_entry.date:
+                productive_hours = rescuetime_entry.productive_hours
+                distracting_hours = rescuetime_entry.distracting_hours
+                break
+
         if matching_answers:
             data_to_display.append({
                 'date': weather_entry.date,
                 'temperature': weather_entry.temperature,
                 'answers': matching_answers,
+                'productive_hours': productive_hours,
+                'distracting_hours': distracting_hours,
+
             })
 
     context = {

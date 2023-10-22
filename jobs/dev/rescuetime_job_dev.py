@@ -15,12 +15,21 @@ django.setup()
 
 from django.contrib.auth.models import User
 from lifeapi_apps.members_app.models import Profile
+from lifeapi_apps.rescuetime_app.models import Rescuetime
 
 # Pick yesterday's date
 yesterday_full = datetime.now() - timedelta(days=1)
 yesterday_formatted = yesterday_full.strftime("%Y-%m-%d")
 
+
 def fetch_from_api(rescuetime_api_key, yesterday_formatted):
+    """
+    A function that simply does a call to the api with the provided api key.
+    Api key is gotten from when "fetch_for_all_users" function is used, which has 
+    the user information from User django model. It returns productive and distracting
+    hours, which later are used in "save_to_db" function.
+    """
+
     # Define the API endpoint URL
     api_url = f"https://www.rescuetime.com/anapi/daily_summary_feed?key={rescuetime_api_key}"
 
@@ -37,36 +46,49 @@ def fetch_from_api(rescuetime_api_key, yesterday_formatted):
         if filtered_data:
             # Process the filtered data as needed
             for entry in filtered_data:
-                chosen_date = f"Date: {entry['date']}" # we're accessing the 'date' key in the dictionary called 'entry'
-                total_hours = f"Total hours: {entry['total_duration_formatted']}"
-                productive_hours = f"All productive hours: {entry['all_productive_duration_formatted']}"
-                distracting_hours = f"All distracting hours: {entry['all_distracting_duration_formatted']}"
-                uncategorized_hours = f"All uncategorized hours: {entry['uncategorized_duration_formatted']}"
+                productive_hours = entry['all_productive_hours']
+                distracting_hours = entry['all_distracting_hours']
 
-                print(chosen_date) 
-                print(total_hours)
-                print(productive_hours)
-                print(distracting_hours)
-                print(uncategorized_hours)
-                print("-----------------------------------------")
+                return productive_hours, distracting_hours
  
         else:
             print(f"No data found for {yesterday_formatted}")
+            return None
     else:
         print(f"Failed to retrieve data. Status code: {response.status_code}")
 
+
+def save_to_db(date_str, user, productive_hours, distracting_hours):
+    """
+    A function responsible for saving received data to the DB. We get data from the above,
+    productivity/distracting hours - from "fetch_from_api) function, user - when doing a for loop
+    over users in "fetch_fro_all_users" function.
+
+    """
+    rescuetime_entry = Rescuetime(
+        date=date_str,
+        productive_hours = productive_hours,
+        distracting_hours = distracting_hours,
+        user = user,
+    )
+    rescuetime_entry.save()
+
+
 def fetch_for_all_users():
+    """
+    Function that loops over all users, getting profile information of each user(api key as well),
+    for "fetch_from_api" function, and user for "save_to_db" function.
+    """
+
     users = User.objects.all()
 
     for user in users:
         try:
-            profile = Profile.objects.get(user=user)  # Get the user's profile
-            print(f"Username: {user.username}")
-            print(f"RescueTime API Key: {profile.rescuetime_api_key}")
-            fetch_from_api(profile.rescuetime_api_key, yesterday_formatted)
+            profile = Profile.objects.get(user=user)
+            productive_hours, distracting_hours = fetch_from_api(profile.rescuetime_api_key, yesterday_formatted)
+            save_to_db(yesterday_formatted, user, productive_hours, distracting_hours)
         except Profile.DoesNotExist:
             # basically if user does not have "rescuetime_api_key" entry assigned
-            print(f"Username: {user.username}")
-            print("No profile found for this user.")
+            return None
 
 fetch_for_all_users()

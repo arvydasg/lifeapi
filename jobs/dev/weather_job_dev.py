@@ -31,7 +31,7 @@ yesterday = datetime.now() - timedelta(days=0)
 date_str = yesterday.strftime("%Y-%m-%d")
 
 # Make the API request to fetch weather data
-api_url = f"https://api.meteo.lt/v1/stations/vilniaus-ams/observations/{date_str}"
+api_url = f"https://api.meteo.lt/v1/stations/panevezio-ams/observations/{date_str}"
 response = requests.get(api_url)
 data_fetched_from_api = response.json()
 

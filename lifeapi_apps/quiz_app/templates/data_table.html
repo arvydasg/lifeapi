@@ -27,7 +27,7 @@
       <tr>
         <!-- https://docs.djangoproject.com/en/dev/ref/templates/builtins/?from=olddocs#date -->
         <!-- <td>{{ entry.date|date:"m-d" }}, {{ entry.date|date:"D" }}</td> -->
-        <td>{{ entry.date|date:"m-d" }}</td>
+        <td>{{ entry.date|date:"Y-m-d" }}</td>
         <td>{{ entry.temperature }}</td>
         <td>{{entry.productive_hours|default:""}}</td>
         <td>{{ entry.distracting_hours|default:"" }}</td>

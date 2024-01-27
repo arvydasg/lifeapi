@@ -66,11 +66,6 @@
               >
             </li>
             {% endif %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'website_fixes' %}"
-                >Website fixes</a
-              >
-            </li>
           </ul>
           <!-- Right-aligned items -->
           <ul class="navbar-nav ml-auto">
@@ -168,18 +163,6 @@
         bSort: true, // Filter A to Z, Z to A (and numbers)
         columnDefs: [
           { targets: [0, 1], orderable: true }, // Define columns to be sortable
-          { targets: "_all", orderable: false }, // Disable sorting for all other columns
-        ],
-        order: [[0, "desc"]], // Set default sorting to the first column (date) in descending order
-      });
-      $("#website_fixes").DataTable({
-        paging: true, // Pagination
-        pageLength: 10, // Data per page
-        bInfo: false, // Info on footer
-        searching: true, // Input search
-        bSort: true, // Filter A to Z, Z to A (and numbers)
-        columnDefs: [
-          { targets: [0, 2], orderable: true }, // Define columns to be sortable
           { targets: "_all", orderable: false }, // Disable sorting for all other columns
         ],
         order: [[0, "desc"]], // Set default sorting to the first column (date) in descending order

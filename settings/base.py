@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     "lifeapi_apps.quiz_app",
     "debug_toolbar",
     "lifeapi_apps.members_app",
-    "lifeapi_apps.website_fixes_app",
     "lifeapi_apps.rescuetime_app",
 ]
 

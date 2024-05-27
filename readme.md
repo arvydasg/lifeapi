@@ -1,3 +1,5 @@
+`docs.docx` contain the most recent info. About closing the project, reasons, etc.
+
 # Lifeapi
 
 > Why not track everything about myself? 

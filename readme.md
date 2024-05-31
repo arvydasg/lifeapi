@@ -1,6 +1,10 @@
-`docs.docx` contain the most recent info. About closing the project, reasons, etc.
-
 # Lifeapi
+
+![lifeapi](image.png)
+![lifeapi](image2.png)
+
+
+
 
 > Why not track everything about myself? 
 
@@ -25,8 +29,8 @@ Instead of writing a manual journal each evening, why not pull various info from
 - [ ] YouTube (fetch what I have watched or minutes)
 - [x] workouts (y/n manual inpput)
 - [ ] weight (fetch kgs)
-- [ ] computer time ( fetch rescue time)
-- [ ] !database size (entries, like felix)
+- [x] computer time ( fetch rescue time)
+- [x] !database size (entries, like felix)
 - [ ] unique website visitors (like felix)
 - [ ] Swarm? My location ( fetch like felix)
 - [x] weather each day
